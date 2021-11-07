@@ -1,9 +1,12 @@
 .BaseLayer {
     position: relative;
     background-color: red;
-    width: 50%;
+    width: 40%;
     height: 50%;
-    border-radius: 30px 30px 20px 20px;
+    border-radius: 30% 30% 20% 20%;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
 }
 
 .WindowLayer {
@@ -24,17 +27,155 @@
 
 .RoofLayer {
     position: absolute;
-    width: 80%;
-    height: 80%;
-    left: 10%;
-    top: 10%;
-    //background-color: pink;
+    width: 70%;
+    height: 70%;
+    left: 15%;
+    top: 15%;
+    background-color: red;
+    border-radius: 1px;
 }
 
-.RoofLine {
-    height: 5px;
-    width: 30px;
+.RoofLineTopLeft {
+    position: absolute;
+    left: 0;
+    top: -10%;
+    height: 10%;
+    width: 50%;
     background-color: red;
     transform-origin: top left;
     transform: rotate(45deg); 
 }
+
+.RoofLineTopRight {
+    position: absolute;
+    right: 0;
+    top: -10%;
+    height: 10%;
+    width: 50%;
+    background-color: red;
+    transform-origin: top right;
+    transform: rotate(-45deg);
+}
+
+.RoofLineBottomLeft {
+    position: absolute;
+    left: 0;
+    height: 10%;
+    bottom: -10%;
+    width: 50%;
+    background-color: red;
+    transform-origin: bottom left;
+    transform: rotate(-45deg);
+}
+
+.RoofLineBottomRight {
+    position: absolute;
+    right: 0;
+    bottom: -10%;
+    height: 10%;
+    width: 50%;
+    background-color: red;
+    transform-origin: bottom right;
+    transform: rotate(45deg);
+}
+
+.HeadLight {
+    position: absolute;
+    left: 30%;
+    width: 10%;
+    height: 10px;
+    background-color: blue;
+}
+
+.WindowLayer {
+    position: absolute;
+    width: 80%;
+    height: 40%;
+    left: 10%;
+    top: 40%;
+    border-radius: 5px;
+    background-color: black;
+}
+
+.RoofContainerLayer{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.RoofLayer {
+    position: absolute;
+    width: 70%;
+    height: 70%;
+    left: 15%;
+    top: 15%;
+    background-color: red;
+    border-radius: 1px;
+}
+
+.RoofLineTopLeft {
+    position: absolute;
+    left: 0;
+    top: -10%;
+    height: 10%;
+    width: 50%;
+    background-color: red;
+    transform-origin: top left;
+    transform: rotate(45deg); 
+}
+
+.RoofLineTopRight {
+    position: absolute;
+    right: 0;
+    top: -10%;
+    height: 10%;
+    width: 50%;
+    background-color: red;
+    transform-origin: top right;
+    transform: rotate(-45deg);
+}
+
+.RoofLineBottomLeft {
+    position: absolute;
+    left: 0;
+    height: 10%;
+    bottom: -10%;
+    width: 50%;
+    background-color: red;
+    transform-origin: bottom left;
+    transform: rotate(-45deg);
+}
+
+.RoofLineBottomRight {
+    position: absolute;
+    right: 0;
+    bottom: -10%;
+    height: 10%;
+    width: 50%;
+    background-color: red;
+    transform-origin: bottom right;
+    transform: rotate(45deg);
+}
+
+.HeadLightLeft {
+    position: absolute;
+    top: 2%;
+    left: 15%;
+    width: 5%;
+    height: 10%;
+    transform: rotate(35deg);
+    border-radius: 50%;
+    background-color: pink;
+}
+
+.HeadLightRight {
+    position: absolute;
+    top: 2%;
+    right: 15%;
+    width: 5%;
+    height: 10%;
+    transform: rotate(-35deg);
+    border-radius: 50%;
+    background-color: pink;
+}
+
