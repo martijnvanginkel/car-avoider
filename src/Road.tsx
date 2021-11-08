@@ -1,12 +1,21 @@
+import { useRef } from 'react'
 import './Road.scss'
-import Player from './Player'
+import Car from './Car'
+import { createTrafficSpawner } from './TrafficSpawner'
 
 function Road() {
-  return (
-    <div className="Road">
-        <Player />
-    </div>
-  );
+
+    const trafficSpawner = useRef(createTrafficSpawner())
+
+//    const [cars, setCars] = useState<any>([])
+
+    return (
+        <div className="Road">
+            <div className="Traffic">
+            </div>
+            <Car/>
+        </div>
+    );
 }
 
 export default Road

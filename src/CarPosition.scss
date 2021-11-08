@@ -2,7 +2,8 @@
     display: flex;
     transition: all 200ms;
     height: 100%;
-    align-items: center;
+   // align-items: center;
+    background-color: blue;
 }
 
 .WrapperLeft {
@@ -10,14 +11,15 @@
 }
 
 .WrapperCenter {
-    transform: translateX(50%);
+    transform: translateX(50%); 
 }
 
 .WrapperRight {
-    transform: translateX(100%)
+    transform: translateX(100%); 
 }
 
-.Player {
+.Car {
+//    align-self: flex-start;
     display: flex;
     justify-content: center;
     align-items: flex-end;
@@ -26,15 +28,15 @@
     background-color: green;
 }
 
-.PlayerLeft {
+.CarLeft {
     transform: translateX(0%);
 }
 
-.PlayerCenter {
-    transform: translateX(-50%);
+.CarCenter {
+    transform: translateX(-50%) translateY(100%); 
 }
 
-.PlayerRight {
-    transform: translatex(-100%);
+.CarRight {
+    transform: translateX(-100%) translateY(-100%);
 }
 

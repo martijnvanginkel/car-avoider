@@ -1,4 +1,3 @@
-import './Player.scss'
 import { useEffect, useState } from 'react'
 
 export enum Position {
