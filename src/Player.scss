@@ -1,6 +1,8 @@
 .Wrapper {
     display: flex;
     transition: all 200ms;
+    height: 100%;
+    align-items: center;
 }
 
 .WrapperLeft {
@@ -18,9 +20,10 @@
 .Player {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
     flex-grow: calc(1/3);
     transition: inherit;
+    background-color: green;
 }
 
 .PlayerLeft {
