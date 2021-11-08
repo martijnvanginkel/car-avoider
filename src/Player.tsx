@@ -1,39 +1,13 @@
 import './Player.scss'
 import { useEffect, useState } from 'react'
 import useWindowSize from './useWindowSize'
+import usePlayerPosition, { Position }  from './usePlayerPosition'
 import Car from './Car'
-
-enum Position {
-    left = 'left',
-    center = 'center',
-    right = 'right'
-}
-
-enum ArrowKey {
-    left = 'left',
-    right = 'right'
-}
 
 function Player() {
 
-    const [position, setPosition] = useState<Position>(Position.center)
+    const position: Position = usePlayerPosition() 
     const { width } = useWindowSize()
-
-    useEffect(() => { 
-        const handleKeyEvent = (event: any) => {
-            if (event.key === 'ArrowLeft') {
-                changePosition(ArrowKey.left)
-            }
-
-            if (event.key === 'ArrowRight') {
-                changePosition(ArrowKey.right)
-            }
-        }
-        window.addEventListener('keydown', handleKeyEvent)
-        return () => {
-            window.removeEventListener('keydown', handleKeyEvent)
-        }
-    })
 
     return (
         <div className={renderWrapperClasses()}>
@@ -65,21 +39,6 @@ function Player() {
             [Position.left]: "WrapperLeft"
         } 
         return `Wrapper ${classes[position]}`
-    }
-
-    function changePosition(key: ArrowKey) {
-        if (position !== Position.center) {
-            setPosition(Position.center)
-            return
-        }
-
-        if (key === ArrowKey.left) {
-            setPosition(Position.left)
-        }
-
-        if (key === ArrowKey.right) {
-            setPosition(Position.right)
-        }
     }
 }
 
