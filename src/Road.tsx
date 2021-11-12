@@ -7,7 +7,6 @@ import { Position } from './usePlayerPosition'
 import PlayerCar from './PlayerCar'
 
 function Road() {
-    
     const { height } = useWindowSize()
     const { trafficObjects, removeTrafficObject } = useTrafficSpawner()
 

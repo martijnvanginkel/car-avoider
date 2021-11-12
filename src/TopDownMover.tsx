@@ -15,7 +15,7 @@ function TopDownMover(props: Props) {
         }, 5000)
         setTimeout(() => {
             console.log('passed')
-        }, 7330)
+        }, 6500)
     }, [])
 
     return (

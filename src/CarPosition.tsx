@@ -24,7 +24,7 @@ function CarPosition({ children, position }) {
     function getCarSize() {
         const roadWidth = (height / 2)
         const carWidth = (roadWidth / 3)
-        const carHeight = (carWidth * 1.4)
+        const carHeight = (carWidth * 1.5)
         return { width: `${carWidth}px`, height: `${carHeight}px` }
     }
 
