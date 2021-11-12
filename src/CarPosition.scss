@@ -1,42 +1,39 @@
-.Wrapper {
-    display: flex;
+.OuterMove {
     transition: all 200ms;
-    height: 100%;
-   // align-items: center;
-    background-color: blue;
 }
 
-.WrapperLeft {
+.OuterMoveLeft {
     transform: translateX(0%);
 }
 
-.WrapperCenter {
+.OuterMoveCenter {
     transform: translateX(50%); 
 }
 
-.WrapperRight {
+.OuterMoveRight {
     transform: translateX(100%); 
 }
 
-.Car {
-//    align-self: flex-start;
+.InnerMove{
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    flex-grow: calc(1/3);
     transition: inherit;
-    background-color: green;
 }
 
-.CarLeft {
+.InnerMoveLeft {
     transform: translateX(0%);
 }
 
-.CarCenter {
-    transform: translateX(-50%) translateY(100%); 
+.InnerMoveCenter {
+    transform: translateX(-50%); 
 }
 
-.CarRight {
-    transform: translateX(-100%) translateY(-100%);
+.InnerMoveRight {
+    transform: translateX(-100%);
 }
 
+.Padding {
+    height: 50%;
+    width: 40%;
+}

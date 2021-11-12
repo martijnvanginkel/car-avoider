@@ -12,7 +12,6 @@ enum ArrowKey {
 }
 
 function usePlayerPosition() {
-
     const [position, setPosition] = useState<Position>(Position.center)
 
     useEffect(() => { 

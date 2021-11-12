@@ -1,64 +1,50 @@
 import React from 'react'
 import './CarPosition.scss'
 import useWindowSize from './useWindowSize'
-import usePlayerPosition, { Position }  from './usePlayerPosition'
-import CarLayout from './CarLayout'
+import { Position }  from './usePlayerPosition'
 
 interface Props {
     children: React.ReactNode    
+    position: Position
 }
 
-function CarPosition(props: Props) {
-
-    const position: Position = usePlayerPosition() 
-    const { width } = useWindowSize()
+function CarPosition({ children, position }) {
+    const { width, height } = useWindowSize()
 
     return (
-        <div className="Wrapper" style={getWrapperStyles(0)}>
-            <div className={'Car'} style={getCarContainerHeight()}>
-                {props.children}
+        <div className={renderOuterMoveClasses()}>
+            <div className={renderInnerMoveClasses()} style={getCarSize()}>
+                <div className="Padding">
+                    {children}
+                </div>
             </div> 
         </div>
     )
 
-    function getCarPosition(height: number) { 
+    function getCarSize() {
+        const roadWidth = (height / 2)
+        const carWidth = (roadWidth / 3)
+        const carHeight = (carWidth * 1.4)
+        return { width: `${carWidth}px`, height: `${carHeight}px` }
     }
 
-    function getWrapperStyles(height: number) {
-        const horizontal = {
-            [Position.right]: 100,
-            [Position.center]: 50,
-            [Position.left]: 0,
-        }
-
-        const xValue = horizontal[position].toString() + '%'
-        const yValue = height.toString() + '%'
-
-        return { transform: `translateX(${xValue}) translateY(${yValue})`}
-    }
-
-    function getCarContainerHeight() {
-        const height = ((width / 2) / 3) * 1.5
-        return { height: `${height}px` }
-    }
-
-    function renderHorizontalClass() {
+    function renderOuterMoveClasses() {
         const classes = {
-            [Position.right]: "CarRight",
-            [Position.center]: "CarCenter",
-            [Position.left]: "CarLeft"
-        }
-
-        return classes[position]
-    }
-
-    function renderWrapperClasses() {
-        const classes = {
-            [Position.right]: "WrapperRight",
-            [Position.center]: "WrapperCenter",
-            [Position.left]: "WrapperLeft"
+            [Position.right]: "OuterMoveRight",
+            [Position.center]: "OuterMoveCenter",
+            [Position.left]: "OuterMoveLeft"
         } 
-        return `Wrapper ${classes[position]}`
+        return `OuterMove ${classes[position]}`
+    }
+
+    function renderInnerMoveClasses() {
+        const classes = {
+            [Position.right]: "InnerMoveRight",
+            [Position.center]: "InnerMoveCenter",
+            [Position.left]: "InnerMoveLeft"
+        }
+
+        return `InnerMove ${classes[position]}`
     }
 }
 

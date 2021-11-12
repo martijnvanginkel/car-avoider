@@ -1,5 +1,4 @@
 .Road {
-    width: 50%;
     height: 100%; 
     background-color: white;
     border-width: 0 6px 0 6px;
@@ -8,8 +7,7 @@
     position: relative;
 }
 
-.Traffic {
-    position: absolute;
-    width: 100%;
+.Padding {
     height: 100%;
+    width: 80%;
 }

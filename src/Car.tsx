@@ -1,9 +1,14 @@
 import CarPosition from './CarPosition'
 import CarLayout from './CarLayout'
+import { Position } from './usePlayerPosition'
 
-function Car() {
+interface Props {
+    position: Position
+}
+
+function Car({ position }) {
     return (
-         <CarPosition>
+         <CarPosition position={position}>
              <CarLayout/>
         </CarPosition>
     )
