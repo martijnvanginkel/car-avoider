@@ -4,8 +4,11 @@ import CarLayout from './CarLayout'
 import usePlayerPosition, { Position } from './usePlayerPosition'
 import useWindowSize from './useWindowSize'
 
-function PlayerCar() {
-    const position: Position = usePlayerPosition() 
+interface Props {
+    position: Position
+}
+
+function PlayerCar<Props>({ position }) {
     const { height } = useWindowSize()
 
     return (

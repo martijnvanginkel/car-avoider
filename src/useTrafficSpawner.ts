@@ -1,7 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
+import { Position } from './usePlayerPosition'
 
 export interface TrafficObject {
     id: string
+    position: Position
 }
 
 function useTrafficSpawner() {
@@ -15,7 +17,9 @@ function useTrafficSpawner() {
     
     useEffect(() => {
         setInterval(() => {
-            setTrafficObjects([...trafficRef.current, { id: getUniqueId() }])
+            setTrafficObjects([...trafficRef.current,
+                { id: getUniqueId(), position: Position.left }
+            ])
         }, 5000);
     }, [])
 

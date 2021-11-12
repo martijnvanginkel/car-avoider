@@ -1,34 +1,72 @@
 import './Road.scss'
+import { useState, useEffect } from 'react'
 import Car from './Car'
 import useWindowSize from './useWindowSize'
 import TopDownMover from './TopDownMover'
 import useTrafficSpawner, { TrafficObject } from './useTrafficSpawner'
-import { Position } from './usePlayerPosition'
+import usePlayerPosition, { Position } from './usePlayerPosition'
 import PlayerCar from './PlayerCar'
+import EnemyCar from './EnemyCar'
+
+interface Lanes {
+    [Position.left]: { occupied: boolean }
+    [Position.center]: { occupied: boolean }
+    [Position.right]: { occupied: boolean }
+}
 
 function Road() {
     const { height } = useWindowSize()
     const { trafficObjects, removeTrafficObject } = useTrafficSpawner()
+    const position: Position = usePlayerPosition() 
+
+    const [lanes, setLanes] = useState<Lanes>({
+        [Position.left]: { occupied: false },
+        [Position.center]: { occupied: false },
+        [Position.right]: { occupied: false }
+    })
+
+    useEffect(() => {
+        const lane = lanes[position]
+        if (lane.occupied) {
+            console.log('is occupied')
+        }
+        else {
+            console.log('not occupied')
+        }
+    }, [position])
 
     return (
         <div className="Road" style={getRoadWidth()}>
             {renderTraffic()}
-            <PlayerCar />
+            <PlayerCar position={position} />
         </div>
     )
 
     function renderTraffic() {
         return trafficObjects.map((trafficObject: TrafficObject) => {
             return (
-                <TopDownMover
+                <EnemyCar
                     key={trafficObject.id}
-                    id={trafficObject.id}
-                    onAnimationEnd={(id: string) => {
-                        removeTrafficObject(id)
+                    onFinished={() => {
+                        removeTrafficObject(trafficObject.id)
                     }}
-                >
-                    <Car />
-                </TopDownMover>
+                    onEnterHitZone={() => {
+                        setLanes((prevState) => {
+                            return {
+                                ...prevState,
+                                [Position.left]: { occupied: true }
+                            }
+                        })
+                    }}
+                    onExitHitZone={() => {
+                        setLanes((prevState) => {
+                            return {
+                                ...prevState,
+                                [Position.left]: { occupied: false }
+                            }
+                        })
+                    }}
+                />
             )
         })
     }
