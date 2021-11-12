@@ -1,6 +1,10 @@
 import React from 'react'
 import './CarLayout.scss'
 
+interface Props {
+    color: string
+}
+
 const CarLayout: React.FC = () => {
     return (
         <div className="BaseLayer">
