@@ -2,13 +2,13 @@ import React, { useEffect } from 'react'
 import './TopDownMover.scss'
 
 interface Props {
-    onAnimationEnd: (id: string) => void
+    onAnimationEnd: () => void
     children: React.ReactNode
     enterHitZone: () => void
     exitHitZone: () => void
 }
 
-function TopDownMover<Props>({ onAnimationEnd, children, enterHitZone, exitHitZone }) {
+const TopDownMover: React.FC<Props> = ({ onAnimationEnd, children, enterHitZone, exitHitZone }) => {
 
     useEffect(() => {
         setTimeout(() => {
@@ -23,7 +23,7 @@ function TopDownMover<Props>({ onAnimationEnd, children, enterHitZone, exitHitZo
         <div className="Container">
             <div
                 className="MajorMovement"
-                onAnimationEnd={(value) => {
+                onAnimationEnd={() => {
                     onAnimationEnd()
                 }}>
                     <div className="LayoutMovement">

@@ -1,24 +1,21 @@
+import React from 'react'
 import './PlayerCar.scss'
 import CarPosition from './CarPosition'
 import CarLayout from './CarLayout'
-import usePlayerPosition, { Position } from './usePlayerPosition'
-import useWindowSize from './useWindowSize'
+import { Position } from './usePlayerPosition'
 
 interface Props {
     position: Position
 }
 
-function PlayerCar<Props>({ position }) {
-    const { height } = useWindowSize()
-
+const PlayerCar: React.FC<Props> = ({ position }) => {
     return (
         <div className="PlayerCar">
             <CarPosition position={position}>
-                <CarLayout/>
+                <CarLayout />
             </CarPosition>
         </div>
     )
-
 }
 
 export default PlayerCar 

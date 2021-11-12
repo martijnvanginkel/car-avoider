@@ -8,8 +8,8 @@ interface Props {
     position: Position
 }
 
-function CarPosition({ children, position }) {
-    const { width, height } = useWindowSize()
+const CarPosition: React.FC<Props> = ({ children, position }) => {
+    const { height } = useWindowSize()
 
     return (
         <div className={renderOuterMoveClasses()}>

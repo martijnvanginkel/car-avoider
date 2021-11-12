@@ -1,6 +1,7 @@
+import React from 'react'
 import './CarLayout.scss'
 
-function CarLayout() {
+const CarLayout: React.FC = () => {
     return (
         <div className="BaseLayer">
             <div className="WindowLayer">

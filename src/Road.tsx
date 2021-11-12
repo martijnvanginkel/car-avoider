@@ -1,8 +1,6 @@
 import './Road.scss'
-import { useState, useEffect } from 'react'
-import Car from './Car'
+import React, { useState, useEffect } from 'react'
 import useWindowSize from './useWindowSize'
-import TopDownMover from './TopDownMover'
 import useTrafficSpawner, { TrafficObject } from './useTrafficSpawner'
 import usePlayerPosition, { Position } from './usePlayerPosition'
 import PlayerCar from './PlayerCar'
@@ -14,7 +12,7 @@ interface Lanes {
     [Position.right]: { occupied: boolean }
 }
 
-function Road() {
+const Road: React.FC = () => {
     const { height } = useWindowSize()
     const { trafficObjects, removeTrafficObject } = useTrafficSpawner()
     const position: Position = usePlayerPosition() 
@@ -26,14 +24,11 @@ function Road() {
     })
 
     useEffect(() => {
-        const lane = lanes[position]
-        if (lane.occupied) {
+        const currentLane = lanes[position]
+        if (currentLane.occupied) {
             console.log('is occupied')
         }
-        else {
-            console.log('not occupied')
-        }
-    }, [position])
+    }, [position, lanes])
 
     return (
         <div className="Road" style={getRoadWidth()}>
@@ -47,6 +42,7 @@ function Road() {
             return (
                 <EnemyCar
                     key={trafficObject.id}
+                    position={trafficObject.position}
                     onFinished={() => {
                         removeTrafficObject(trafficObject.id)
                     }}

@@ -1,13 +1,15 @@
 import TopDownMover from './TopDownMover'
 import Car from './Car'
+import { Position } from './usePlayerPosition'
 
 interface Props {
-    onFinished: (id: string) => void
+    position: Position
+    onFinished: () => void
     onEnterHitZone: () => void
     onExitHitZone: () => void
 }
 
-function EnemyCar<Props>({ onFinished, onEnterHitZone, onExitHitZone }) {
+const EnemyCar: React.FC<Props> = ({ position, onFinished, onEnterHitZone, onExitHitZone }) => {
     return (
         <TopDownMover
             onAnimationEnd={() => {
@@ -16,7 +18,7 @@ function EnemyCar<Props>({ onFinished, onEnterHitZone, onExitHitZone }) {
             enterHitZone={onEnterHitZone}
             exitHitZone={onExitHitZone}
         >
-            <Car />
+            <Car position={position} />
         </TopDownMover>
     )
 }

@@ -1,3 +1,4 @@
+import React from 'react'
 import CarPosition from './CarPosition'
 import CarLayout from './CarLayout'
 import { Position } from './usePlayerPosition'
@@ -6,9 +7,9 @@ interface Props {
     position: Position
 }
 
-function Car({ position }) {
+const Car: React.FC<Props> = (props: Props) => {
     return (
-         <CarPosition position={position}>
+         <CarPosition position={props.position}>
              <CarLayout/>
         </CarPosition>
     )
