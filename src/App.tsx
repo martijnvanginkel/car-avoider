@@ -1,10 +1,13 @@
 import './App.scss';
 import Road from './Road'
+import GameOverProvider from './GameOverProvider'
 
 function App() {
   return (
     <div className="App">
-        <Road />
+        <GameOverProvider>
+            <Road />
+        </GameOverProvider>
     </div>
   );
 }

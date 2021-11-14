@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import './TopDownMover.scss'
+import { useGameOver } from './GameOverProvider'
 
 interface Props {
     onAnimationEnd: () => void
@@ -10,6 +11,8 @@ interface Props {
 
 const TopDownMover: React.FC<Props> = ({ onAnimationEnd, children, enterHitZone, exitHitZone }) => {
 
+    const gameOver = useGameOver() 
+    
     useEffect(() => {
         setTimeout(() => {
             enterHitZone()
