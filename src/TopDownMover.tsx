@@ -39,7 +39,7 @@ const TopDownMover: React.FC<Props> = ({ onAnimationEnd, children, enterHitZone,
     )
 
     function pauseAnimation() {
-        return { animationPlayState: 'paused' }
+        return { animationPlayState: '' }// paused
     }
 }
 

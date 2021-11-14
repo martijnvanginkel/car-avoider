@@ -5,6 +5,7 @@ import useTrafficSpawner, { TrafficObject } from './useTrafficSpawner'
 import usePlayerPosition, { Position } from './usePlayerPosition'
 import PlayerCar from './PlayerCar'
 import EnemyCar from './EnemyCar'
+import { useGameOverUpdate } from './GameOverProvider'
 
 interface Lanes {
     [Position.left]: { occupied: boolean }
@@ -16,6 +17,7 @@ const Road: React.FC = () => {
     const { height } = useWindowSize()
     const { trafficObjects, removeTrafficObject } = useTrafficSpawner()
     const position: Position = usePlayerPosition() 
+    const toggleGameIsOver = useGameOverUpdate()    
 
     const [lanes, setLanes] = useState<Lanes>({
         [Position.left]: { occupied: false },
@@ -26,6 +28,7 @@ const Road: React.FC = () => {
     useEffect(() => {
         const currentLane = lanes[position]
         if (currentLane.occupied) {
+            toggleGameIsOver?.toggleGameIsOver() 
             console.log('is occupied')
         }
     }, [position, lanes])
