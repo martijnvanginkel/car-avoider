@@ -25,13 +25,19 @@ const TopDownMover: React.FC<Props> = ({ onAnimationEnd, children, enterHitZone,
                 className="MajorMovement"
                 onAnimationEnd={() => {
                     onAnimationEnd()
-                }}>
+                }}
+                style={pauseAnimation()}
+            >
                     <div className="LayoutMovement">
                         {children}
                     </div>
             </div>
         </div>
     )
+
+    function pauseAnimation() {
+        return { animationPlayState: 'paused' }
+    }
 }
 
 export default TopDownMover 
