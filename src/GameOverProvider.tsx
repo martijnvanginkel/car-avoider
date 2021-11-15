@@ -27,7 +27,7 @@ const GameOverProvider: React.FC<Props> = ({ children }) => {
     const [isGameOver, setIsGameOver] = useState<boolean>(false)
 
     function toggleGameIsOver() {
-        setIsGameOver(prevGameOverValue => !prevGameOverValue)
+        setIsGameOver(true)
     }
 
     return (

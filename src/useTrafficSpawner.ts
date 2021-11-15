@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { Position } from './usePlayerPosition'
+import { useGameOver } from './GameOverProvider'
 
 export interface TrafficObject {
     id: string
@@ -10,18 +11,23 @@ function useTrafficSpawner() {
     const initialstate: TrafficObject[] = []
     const [trafficObjects, setTrafficObjects] = useState<TrafficObject[]>(initialstate)
     const trafficRef = useRef(initialstate)
+    const gameOver = useGameOver()
 
     useEffect(() => {
         trafficRef.current = trafficObjects 
     })
     
     useEffect(() => {
-        setInterval(() => {
+        if (gameOver?.isGameOver === true) {
+            return
+        }
+        const interval = setInterval(() => {
             setTrafficObjects([...trafficRef.current,
                 { id: getUniqueId(), position: Position.left }
             ])
-        }, 5000);
-    }, [])
+        }, 5000)
+        return () => clearInterval(interval)
+    }, [gameOver?.isGameOver])
 
     function getUniqueId() {
         return new Date().getTime().toString()

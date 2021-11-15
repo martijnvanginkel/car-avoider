@@ -12,7 +12,7 @@ interface Props {
 const TopDownMover: React.FC<Props> = ({ onAnimationEnd, children, enterHitZone, exitHitZone }) => {
 
     const gameOver = useGameOver() 
-    
+    console.log(gameOver.isGameOver)    
     useEffect(() => {
         setTimeout(() => {
             enterHitZone()

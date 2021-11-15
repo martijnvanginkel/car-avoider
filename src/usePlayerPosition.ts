@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useGameOver } from './GameOverProvider'
 
 export enum Position {
     left = 'left',
@@ -13,8 +14,12 @@ enum ArrowKey {
 
 function usePlayerPosition() {
     const [position, setPosition] = useState<Position>(Position.center)
+    const gameOver = useGameOver() 
 
     useEffect(() => { 
+        if (gameOver?.isGameOver === true) {
+            return
+        }
         const handleKeyEvent = (event: any) => {
             if (event.key === 'ArrowLeft') {
                 changePosition(ArrowKey.left)
