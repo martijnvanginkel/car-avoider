@@ -11,14 +11,14 @@ function useTrafficSpawner() {
     const initialstate: TrafficObject[] = []
     const [trafficObjects, setTrafficObjects] = useState<TrafficObject[]>(initialstate)
     const trafficRef = useRef(initialstate)
-    const gameOver = useGameOver()
+    const isGameOver = useGameOver()
 
     useEffect(() => {
         trafficRef.current = trafficObjects 
     })
     
     useEffect(() => {
-        if (gameOver?.isGameOver === true) {
+        if (isGameOver) {
             return
         }
         const interval = setInterval(() => {
@@ -27,7 +27,7 @@ function useTrafficSpawner() {
             ])
         }, 5000)
         return () => clearInterval(interval)
-    }, [gameOver?.isGameOver])
+    }, [isGameOver])
 
     function getUniqueId() {
         return new Date().getTime().toString()

@@ -14,10 +14,10 @@ enum ArrowKey {
 
 function usePlayerPosition() {
     const [position, setPosition] = useState<Position>(Position.center)
-    const gameOver = useGameOver() 
+    const isGameOver = useGameOver() 
 
     useEffect(() => { 
-        if (gameOver?.isGameOver === true) {
+        if (isGameOver === true) {
             return
         }
         const handleKeyEvent = (event: any) => {

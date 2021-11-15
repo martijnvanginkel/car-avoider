@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react'
 
-interface GameOverContextType {
-    isGameOver: boolean
-}
+//interface GameOverContextType {
+//    isGameOver: boolean
+//}
 
 interface GameOverUpdateContextType {
     toggleGameIsOver: () => void
@@ -12,7 +12,7 @@ interface Props {
     children: React.ReactNode
 }
 
-const GameOverContext = React.createContext<GameOverContextType | null>(null)
+const GameOverContext = React.createContext<boolean>(false)
 const GameOverUpdateContext = React.createContext<GameOverUpdateContextType | null>(null)
 
 export const useGameOver = () => {
@@ -31,7 +31,7 @@ const GameOverProvider: React.FC<Props> = ({ children }) => {
     }
 
     return (
-        <GameOverContext.Provider value={{ isGameOver }}>
+        <GameOverContext.Provider value={isGameOver}>
             <GameOverUpdateContext.Provider value={{ toggleGameIsOver }}>
                 {children}
             </GameOverUpdateContext.Provider>

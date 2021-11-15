@@ -2,6 +2,7 @@ import React from 'react'
 import './CarPosition.scss'
 import useWindowSize from './useWindowSize'
 import { Position }  from './usePlayerPosition'
+import { useGameOver } from './GameOverProvider'
 
 interface Props {
     children: React.ReactNode    
@@ -10,9 +11,10 @@ interface Props {
 
 const CarPosition: React.FC<Props> = ({ children, position }) => {
     const { height } = useWindowSize()
+    const isGameOver = useGameOver()
 
     return (
-        <div className={renderOuterMoveClasses()}>
+        <div className={renderOuterMoveClasses()} style={pauseAnimation()}>
             <div className={renderInnerMoveClasses()} style={getCarSize()}>
                 <div className="Padding">
                     {children}
@@ -20,6 +22,10 @@ const CarPosition: React.FC<Props> = ({ children, position }) => {
             </div> 
         </div>
     )
+    function pauseAnimation() {
+        const playState = isGameOver ? 'paused' : ''
+        return { animationPlayState: playState }
+    }
 
     function getCarSize() {
         const roadWidth = (height / 2)

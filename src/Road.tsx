@@ -25,6 +25,9 @@ const Road: React.FC = () => {
         [Position.right]: { occupied: false }
     })
 
+
+    // make difference between if player moves in or if a car moves in
+    // if player moves in, check first if occupied before moving player and add different class to midst stop animation
     useEffect(() => {
         const currentLane = lanes[position]
         if (currentLane.occupied) {

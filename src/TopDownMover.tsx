@@ -11,8 +11,8 @@ interface Props {
 
 const TopDownMover: React.FC<Props> = ({ onAnimationEnd, children, enterHitZone, exitHitZone }) => {
 
-    const gameOver = useGameOver() 
-    console.log(gameOver.isGameOver)    
+    const isGameOver = useGameOver() 
+    console.log(isGameOver)    
     useEffect(() => {
         setTimeout(() => {
             enterHitZone()
@@ -37,16 +37,10 @@ const TopDownMover: React.FC<Props> = ({ onAnimationEnd, children, enterHitZone,
             </div>
         </div>
     )
-    
-    function getAnimationPlayState() {
-        if (!gameOver?.isGameOver) {
-            return ''
-        }
-        return 'paused'
-    }
 
     function pauseAnimation() {
-        return { animationPlayState: getAnimationPlayState() }
+        const playState = isGameOver ? 'paused' : ''
+        return { animationPlayState: playState }
     }
 }
 
