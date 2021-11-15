@@ -31,15 +31,22 @@ const TopDownMover: React.FC<Props> = ({ onAnimationEnd, children, enterHitZone,
                 }}
                 style={pauseAnimation()}
             >
-                    <div className="LayoutMovement">
+                    <div className="LayoutMovement" style={pauseAnimation()}>
                         {children}
                     </div>
             </div>
         </div>
     )
+    
+    function getAnimationPlayState() {
+        if (!gameOver?.isGameOver) {
+            return ''
+        }
+        return 'paused'
+    }
 
     function pauseAnimation() {
-        return { animationPlayState: '' }// paused
+        return { animationPlayState: getAnimationPlayState() }
     }
 }
 

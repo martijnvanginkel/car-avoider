@@ -33,7 +33,6 @@ const GameOverProvider: React.FC<Props> = ({ children }) => {
     return (
         <GameOverContext.Provider value={{ isGameOver }}>
             <GameOverUpdateContext.Provider value={{ toggleGameIsOver }}>
-                {isGameOver ? <h1>hoi</h1> : null}
                 {children}
             </GameOverUpdateContext.Provider>
         </GameOverContext.Provider>
