@@ -3,6 +3,7 @@ import './CarPosition.scss'
 import useWindowSize from './useWindowSize'
 import { Position }  from './usePlayerPosition'
 import { useGameOver } from './GameOverProvider'
+import useLaneOccupation from './useLaneOccupation'
 
 interface Props {
     children: React.ReactNode    

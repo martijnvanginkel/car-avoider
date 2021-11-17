@@ -8,35 +8,37 @@ import EnemyCar from './EnemyCar'
 import { useGameOverUpdate } from './GameOverProvider'
 import useLaneOccupation from './useLaneOccupation' 
 
-//interface Lanes {
-//    [Position.left]: { occupied: boolean }
-//    [Position.center]: { occupied: boolean }
-//    [Position.right]: { occupied: boolean }
-//}
+interface Lanes {
+    [Position.left]: { occupied: boolean }
+    [Position.center]: { occupied: boolean }
+    [Position.right]: { occupied: boolean }
+}
 
 const Road: React.FC = () => {
     const { height } = useWindowSize()
     const { trafficObjects, removeTrafficObject } = useTrafficSpawner()
 
     const position: Position = usePlayerPosition() 
-//    const toggleGameIsOver = useGameOverUpdate()    
+    const toggleGameIsOver = useGameOverUpdate()    
 
-    const { setLaneOccupied } = useLaneOccupation()
+//    const { setLaneOccupied } = useLaneOccupation()
+    
 
+    const [lanes, setLanes] = useState<Lanes>({
+        [Position.left]: { occupied: false },
+        [Position.center]: { occupied: false },
+        [Position.right]: { occupied: false }
+    })
 
-//    const [lanes, setLanes] = useState<Lanes>({
-//        [Position.left]: { occupied: false },
-//        [Position.center]: { occupied: false },
-//        [Position.right]: { occupied: false }
-//    })
-//
-//    useEffect(() => {
-//        const currentLane = lanes[position]
-//        if (currentLane.occupied) {
-//            toggleGameIsOver?.toggleGameIsOver() 
-//            console.log('is occupied')
-//        }
-//    }, [position, lanes])
+    // make a car crashed into other car boolean and set as prop to PlayerCar with according css state
+
+    useEffect(() => {
+        const currentLane = lanes[position]
+        if (currentLane.occupied) {
+            toggleGameIsOver?.toggleGameIsOver() 
+            console.log('is occupied')
+        }
+    }, [position, lanes])
 
     return (
         <div className="Road" style={getRoadWidth()}>
@@ -59,14 +61,14 @@ const Road: React.FC = () => {
         })
     }
 
-//    function setLaneOccupied(lane: Position, occupied: boolean) {
-//        setLanes(prevState => {
-//            return {
-//                ...prevState,
-//                [Position[lane]]: { occupied: occupied } 
-//            }
-//        })
-//    }
+    function setLaneOccupied(lane: Position, occupied: boolean) {
+        setLanes(prevState => {
+            return {
+                ...prevState,
+                [Position[lane]]: { occupied: occupied } 
+            }
+        })
+    }
 
     function getRoadWidth() {
         const roadWidth = (height / 2)

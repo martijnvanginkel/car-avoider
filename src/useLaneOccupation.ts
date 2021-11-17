@@ -38,6 +38,7 @@ function useLaneOccupation() {
     }
 
     return {
+        lanes,
         setLaneOccupied
     }
 }
