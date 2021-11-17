@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
-import { Position } from './usePlayerPosition'
-import { useGameOver } from './GameOverProvider'
+import usePlayerPosition, { Position } from './usePlayerPosition'
+import { useGameOver, useGameOverUpdate } from './GameOverProvider'
 
 export interface TrafficObject {
     id: string
@@ -8,10 +8,12 @@ export interface TrafficObject {
 }
 
 function useTrafficSpawner() {
-    const initialstate: TrafficObject[] = []
-    const [trafficObjects, setTrafficObjects] = useState<TrafficObject[]>(initialstate)
-    const trafficRef = useRef(initialstate)
+    const initialTrafficState: TrafficObject[] = []
+    const [trafficObjects, setTrafficObjects] = useState<TrafficObject[]>(initialTrafficState)
+    const trafficRef = useRef(initialTrafficState)
+    
     const isGameOver = useGameOver()
+    const position: Position = usePlayerPosition() 
 
     useEffect(() => {
         trafficRef.current = trafficObjects 

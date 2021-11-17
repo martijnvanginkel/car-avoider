@@ -21,6 +21,7 @@ function usePlayerPosition() {
             return
         }
         const handleKeyEvent = (event: any) => {
+            console.log('click')
             if (event.key === 'ArrowLeft') {
                 changePosition(ArrowKey.left)
             }
