@@ -13,13 +13,17 @@ const TopDownMover: React.FC<Props> = ({ onAnimationEnd, children, enterHitZone,
 
     const isGameOver = useGameOver() 
     useEffect(() => {
-        setTimeout(() => {
+        const timer1 = setTimeout(() => {
             console.log('enter hitzone')
             enterHitZone()
         }, 5000)
-        setTimeout(() => {
+        const timer2 = setTimeout(() => {
             exitHitZone()
         }, 6500)
+        return () => {
+            clearTimeout(timer1)
+            clearTimeout(timer2)
+        }
     }, [])
 
     return (
