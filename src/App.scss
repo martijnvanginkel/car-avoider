@@ -1,6 +1,15 @@
 .App {
+    position: relative;
     display: flex;
     justify-content: center;
     height: 100%;
-    background-color: pink;
+    width: 100%;
+}
+
+.Modal {
+    position: absolute;
+    background-color: blue;
+    height: 100%;
+    width: 100%;
+    opacity: 0.2;
 }

@@ -1,9 +1,5 @@
 import React, { useContext, useState } from 'react'
 
-//interface GameOverContextType {
-//    isGameOver: boolean
-//}
-
 interface GameOverUpdateContextType {
     toggleGameIsOver: () => void
 }

@@ -21,9 +21,6 @@ const Road: React.FC = () => {
     const position: Position = usePlayerPosition() 
     const toggleGameIsOver = useGameOverUpdate()    
 
-//    const { setLaneOccupied } = useLaneOccupation()
-    
-
     const [lanes, setLanes] = useState<Lanes>({
         [Position.left]: { occupied: false },
         [Position.center]: { occupied: false },
@@ -31,7 +28,6 @@ const Road: React.FC = () => {
     })
 
     // make a car crashed into other car boolean and set as prop to PlayerCar with according css state
-
     useEffect(() => {
         const currentLane = lanes[position]
         if (currentLane.occupied) {
