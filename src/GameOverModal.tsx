@@ -2,24 +2,26 @@ import React from 'react'
 import './GameOverModal.scss'
 import { useGameOver } from './GameOverProvider'
 
-interface Props {}
+interface Props {
+    onRetryClick: () => void
+}
 
-const GameOverModal: React.FC<Props> = () => {
+const GameOverModal: React.FC<Props> = ({ onRetryClick }) => {
     
     const isGameOver = useGameOver()
 
-    if (isGameOver) {
+    if (!isGameOver) {
         return null
     }
 
     return (
-        <div className="Container">
-            <div className="Modal">
+        <>
+            <div className="ModalBackground">
             </div>
-            <div className="ButtonsContainer">
-                <button className="Button">Button 1</button>
+            <div className="ModalAligner">
+                <button className="Button" onClick={onRetryClick}>Retry</button>
             </div>
-        </div>
+        </>
     )
 }
 
