@@ -8,31 +8,18 @@ import EnemyCar from './EnemyCar'
 import { useGameOverUpdate } from './GameOverProvider'
 import useLaneOccupation from './useLaneOccupation' 
 
-interface Lanes {
-    [Position.left]: { occupied: boolean }
-    [Position.center]: { occupied: boolean }
-    [Position.right]: { occupied: boolean }
-}
-
 const Road: React.FC = () => {
     const { height } = useWindowSize()
-    const { trafficObjects, removeTrafficObject } = useTrafficSpawner()
 
     const position: Position = usePlayerPosition() 
+    const { trafficObjects, lanes, removeTrafficObject, setLaneOccupied } = useTrafficSpawner()
     const toggleGameIsOver = useGameOverUpdate()    
 
-    const [lanes, setLanes] = useState<Lanes>({
-        [Position.left]: { occupied: false },
-        [Position.center]: { occupied: false },
-        [Position.right]: { occupied: false }
-    })
-
-    // make a car crashed into other car boolean and set as prop to PlayerCar with according css state
+//    // make a car crashed into other car boolean and set as prop to PlayerCar with according css state
     useEffect(() => {
         const currentLane = lanes[position]
         if (currentLane.occupied) {
             toggleGameIsOver?.toggleGameIsOver() 
-            console.log('is occupied')
         }
     }, [position, lanes])
 
@@ -55,15 +42,6 @@ const Road: React.FC = () => {
                     onExitHitZone={() => setLaneOccupied(trafficObject.position, false)}
                 />
             )
-        })
-    }
-
-    function setLaneOccupied(lane: Position, occupied: boolean) {
-        setLanes(prevState => {
-            return {
-                ...prevState,
-                [Position[lane]]: { occupied: occupied } 
-            }
         })
     }
 

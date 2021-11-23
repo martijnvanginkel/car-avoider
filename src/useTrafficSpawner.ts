@@ -8,6 +8,12 @@ export interface TrafficObject {
     speed: number
 }
 
+interface Lanes {
+    [Position.left]: { occupied: boolean }
+    [Position.center]: { occupied: boolean }
+    [Position.right]: { occupied: boolean }
+}
+
 function useTrafficSpawner() {
     const initialTrafficState: TrafficObject[] = []
     const [trafficObjects, setTrafficObjects] = useState<TrafficObject[]>(initialTrafficState)
@@ -15,6 +21,12 @@ function useTrafficSpawner() {
     
     const isGameOver = useGameOver()
     const position: Position = usePlayerPosition() 
+
+    const [lanes, setLanes] = useState<Lanes>({
+        [Position.left]: { occupied: false },
+        [Position.center]: { occupied: false },
+        [Position.right]: { occupied: false }
+    })
 
     useEffect(() => {
         trafficRef.current = trafficObjects 
@@ -35,7 +47,16 @@ function useTrafficSpawner() {
     function getUniqueId() {
         return new Date().getTime().toString()
     }
-    
+
+    function setLaneOccupied(lane: Position, occupied: boolean) {
+        setLanes(prevState => {
+            return {
+                ...prevState,
+                [Position[lane]]: { occupied: occupied } 
+            }
+        })
+    }
+ 
     function removeTrafficObject(id: string) {
         const filtered = trafficObjects.filter(trafficObject => trafficObject.id !== id)
         setTrafficObjects(filtered)
@@ -43,6 +64,8 @@ function useTrafficSpawner() {
  
     return {
         trafficObjects,
+        lanes,
+        setLaneOccupied,
         removeTrafficObject
     }
 }
