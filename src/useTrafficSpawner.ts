@@ -26,7 +26,7 @@ function useTrafficSpawner() {
         }
         const interval = setInterval(() => {
             setTrafficObjects([...trafficRef.current,
-                { id: getUniqueId(), position: Position.center, speed: 3 }
+                { id: getUniqueId(), position: Position.center, speed: 5 }
             ])
         }, 2000)
         return () => clearInterval(interval)

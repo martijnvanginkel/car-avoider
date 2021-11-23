@@ -25,12 +25,11 @@ const TopDownMover: React.FC<Props> = ({
 
     useEffect(() => {
         const enterTimer = setTimeout(() => {
-            console.log('enter hitzone')
             enterHitZone()
-        }, 5000)
+        }, getHitZoneTime(speed).enter)
         const exitTimer = setTimeout(() => {
             exitHitZone()
-        }, 6500)
+        }, getHitZoneTime(speed).exit)
         return () => {
             clearTimeout(enterTimer)
             clearTimeout(exitTimer)
@@ -59,7 +58,7 @@ const TopDownMover: React.FC<Props> = ({
             [Position.center]: 'center',
             [Position.right]: 'flex-end'
         }
-        return { 'justify-content': styles[position] }
+        return { 'justifyContent': styles[position] }
     }
 
 
