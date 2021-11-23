@@ -4,14 +4,23 @@ import { Position } from './usePlayerPosition'
 
 interface Props {
     position: Position
+    speed: number
     onFinished: () => void
     onEnterHitZone: () => void
     onExitHitZone: () => void
 }
 
-const EnemyCar: React.FC<Props> = ({ position, onFinished, onEnterHitZone, onExitHitZone }) => {
+const EnemyCar: React.FC<Props> = ({
+    position,
+    speed,
+    onFinished,
+    onEnterHitZone,
+    onExitHitZone
+}) => {
     return (
         <TopDownMover
+            position={position}
+            speed={speed}
             onAnimationEnd={() => {
                 onFinished()
             }}

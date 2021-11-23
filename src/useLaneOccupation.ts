@@ -12,7 +12,6 @@ function useLaneOccupation() {
  
     const position = usePlayerPosition()
     const toggleGameIsOver = useGameOverUpdate()
-    console.log(position)
 
     const [lanes, setLanes] = useState<Lanes>({
         [Position.left]: { occupied: false },

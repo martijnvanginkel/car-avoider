@@ -1,50 +1,74 @@
 import React, { useEffect } from 'react'
 import './TopDownMover.scss'
 import { useGameOver } from './GameOverProvider'
+import { Position } from './usePlayerPosition'
+import { getHitZoneTime } from './utils/speedCalculations'
 
 interface Props {
+    position: Position
+    speed: number
     onAnimationEnd: () => void
     children: React.ReactNode
     enterHitZone: () => void
     exitHitZone: () => void
 }
 
-const TopDownMover: React.FC<Props> = ({ onAnimationEnd, children, enterHitZone, exitHitZone }) => {
-
+const TopDownMover: React.FC<Props> = ({
+    position,
+    speed,
+    onAnimationEnd,
+    children,
+    enterHitZone,
+    exitHitZone
+}) => {
     const isGameOver = useGameOver() 
+
     useEffect(() => {
-        const timer1 = setTimeout(() => {
+        const enterTimer = setTimeout(() => {
             console.log('enter hitzone')
             enterHitZone()
         }, 5000)
-        const timer2 = setTimeout(() => {
+        const exitTimer = setTimeout(() => {
             exitHitZone()
         }, 6500)
         return () => {
-            clearTimeout(timer1)
-            clearTimeout(timer2)
+            clearTimeout(enterTimer)
+            clearTimeout(exitTimer)
         }
     }, [])
 
     return (
-        <div className="Container">
+        <div className="Container" style={getPositionStyle()}>
             <div
                 className="MajorMovement"
                 onAnimationEnd={() => {
                     onAnimationEnd()
                 }}
-                style={pauseAnimation()}
+                style={getAnimationDetails()}
             >
-                    <div className="LayoutMovement" style={pauseAnimation()}>
+                    <div className="LayoutMovement" style={getAnimationDetails()}>
                         {children}
                     </div>
             </div>
         </div>
     )
 
-    function pauseAnimation() {
+    function getPositionStyle() {
+        const styles = {
+            [Position.left]: 'flex-start',
+            [Position.center]: 'center',
+            [Position.right]: 'flex-end'
+        }
+        return { 'justify-content': styles[position] }
+    }
+
+
+    function getAnimationDetails() {
         const playState = isGameOver ? 'paused' : ''
-        return { animationPlayState: playState }
+        return {
+            animationPlayState: playState,
+            animationDuration: `${speed * 1000}ms`
+        }
     }
 }
 

@@ -49,6 +49,7 @@ const Road: React.FC = () => {
                 <EnemyCar
                     key={trafficObject.id}
                     position={trafficObject.position}
+                    speed={trafficObject.speed}
                     onFinished={() => removeTrafficObject(trafficObject.id)}
                     onEnterHitZone={() => setLaneOccupied(trafficObject.position, true)}
                     onExitHitZone={() => setLaneOccupied(trafficObject.position, false)}

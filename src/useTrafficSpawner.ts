@@ -5,6 +5,7 @@ import { useGameOver, useGameOverUpdate } from './GameOverProvider'
 export interface TrafficObject {
     id: string
     position: Position
+    speed: number
 }
 
 function useTrafficSpawner() {
@@ -25,9 +26,9 @@ function useTrafficSpawner() {
         }
         const interval = setInterval(() => {
             setTrafficObjects([...trafficRef.current,
-                { id: getUniqueId(), position: Position.left }
+                { id: getUniqueId(), position: Position.center, speed: 3 }
             ])
-        }, 5000)
+        }, 2000)
         return () => clearInterval(interval)
     }, [isGameOver])
 

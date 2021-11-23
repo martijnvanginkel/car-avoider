@@ -6,14 +6,15 @@ import GameOverModal from './GameOverModal'
 
 function App() {
 
-    const [resetApp, setResetApp] = useState<number>(0)
+    const [retries, setRetries] = useState<number>(0)
 
     return (
-        <div className="App" key={resetApp}>
+        // by changing the key value, child components will reset
+        <div className="App" key={retries}>
             <GameOverProvider>
                 <Road />
                 <GameOverModal onRetryClick={() => {
-                    setResetApp((prevValue: number) => prevValue + 1)
+                    setRetries((prevValue: number) => prevValue + 1)
                 }}/>
             </GameOverProvider>
         </div>
