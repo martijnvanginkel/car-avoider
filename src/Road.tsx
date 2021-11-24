@@ -6,7 +6,6 @@ import usePlayerPosition, { Position } from './usePlayerPosition'
 import PlayerCar from './PlayerCar'
 import EnemyCar from './EnemyCar'
 import { useGameOverUpdate } from './GameOverProvider'
-import useLaneOccupation from './useLaneOccupation' 
 
 const Road: React.FC = () => {
     const { height } = useWindowSize()
