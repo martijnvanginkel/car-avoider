@@ -35,13 +35,7 @@ function useTrafficSpawner() {
     const [lanes, setLanes] = useState<Lanes>(initialLanesState)
     const lanesRef = useRef(initialLanesState)
 
-    const [spawnHistory, setSpawnHistory] = useState<any>({
-        [Position.left]: { speed: 0 },
-        [Position.center]: { speed: 0 },
-        [Position.right]: { speed: 0 }
-    })
-
-    const [lastSpawn, setLastSpawn] = useState<any>({ [Position.left]: 0, [Position.right]: 1 })
+    const [lastSpawn, setLastSpawn] = useState<any>({ [Position.left]: 13 })
 
     const isGameOver = useGameOver()
     const position: Position = usePlayerPosition() 
@@ -52,7 +46,7 @@ function useTrafficSpawner() {
     }
 
     function getRandomSpeed() {
-        return Math.floor(Math.random() * 11) + 7 
+        return Math.floor(Math.random() * 14) + 7 
     }
 
     useEffect(() => {
@@ -69,24 +63,40 @@ function useTrafficSpawner() {
             return speed
         }
 
-        const speed = getSpeedNotSameAsLast() 
-        console.log(speed)
+        const lastSpeed = lastSpawn[Position.left]
+        let speed = 0// getSpeedNotSameAsLast()
+        //console.log(speed)
 
-        const id = getUniqueId()
-        console.log('use effect')
+        if (lastSpeed === 13) {
+            speed = 11         
+        }
+        
+        if (lastSpeed === 11) {
+            speed = 13 
+        }
+
+        const getWaitTime = () => {
+            let waitTime = (lastSpeed - speed) * 1000
+            if (waitTime <= 0) {
+                return 500
+            }
+            return waitTime + 500
+        }
+
+        const waitTime = getWaitTime()
+
         const timer = setTimeout(() => {
             setTrafficObjects([...trafficRef.current,
                 {
-                    id: id, 
+                    id: getUniqueId(), 
                     position: Position.left,
-                    speed: 5 
+                    speed: speed 
                 }
             ])
 
-            setLastSpawn({ [Position.left]: speed, [Position.right]: lastSpawn[Position.right] })
+            setLastSpawn({ [Position.left]: speed })
            
-        }, 5000) 
-
+       }, waitTime) 
 
         return () => clearTimeout(timer)
         

@@ -11,21 +11,23 @@
     position: relative;
     width: calc(100% / 3);
     height: 100%;
-    background-color: transparent;
- //   animation-duration: $animation-duration;
+//    background-color: red;
+//    transform: translateY(-100%);
+//   animation-duration: $animation-duration;
     animation-name: MajorMovement;
     animation-timing-function: linear;
 }
 
 .LayoutMovement {
 //    animation-duration: $animation-duration;
-    animation-name: LayoutMovement;
+background-color: blue;
+ //  animation-name: LayoutMovement;
     animation-timing-function: linear;
 }
 
 @keyframes MajorMovement {
     from {
-        transform: translateY(0%);
+        transform: translateY(-100%);
     }
     to {
         transform: translateY(100%);
