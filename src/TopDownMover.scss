@@ -11,16 +11,18 @@
     position: relative;
     width: calc(100% / 3);
     height: 100%;
+    display: flex;
+    align-items: center;
 //    background-color: red;
-//    transform: translateY(-100%);
 //   animation-duration: $animation-duration;
     animation-name: MajorMovement;
     animation-timing-function: linear;
 }
 
-.LayoutMovement {
+.CenterLayout {
+    transform: translateY(-50%);
 //    animation-duration: $animation-duration;
-background-color: blue;
+//    background-color: blue;
  //  animation-name: LayoutMovement;
     animation-timing-function: linear;
 }

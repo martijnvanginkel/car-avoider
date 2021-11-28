@@ -100,7 +100,7 @@ function useTrafficSpawner() {
 
         return () => clearTimeout(timer)
         
-    }, [lastSpawn[Position.left]])
+    }, [])
 
     // have an useEffect for every Lane, then have it all have its own setTimeout and it will calculate it's own timeout based on what it previously was if its set at all
 

@@ -45,7 +45,7 @@ const TopDownMover: React.FC<Props> = ({
                 }}
                 style={getAnimationDetails()}
             >
-                    <div className="LayoutMovement" style={getAnimationDetails()}>
+                    <div className="CenterLayout" style={getAnimationDetails()}>
                         {children}
                     </div>
             </div>
