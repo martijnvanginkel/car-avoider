@@ -11,6 +11,7 @@ export interface TrafficObject {
     id: string
     position: Position
     speed: number
+    multiplier: number
 }
 
 interface Lanes {
@@ -30,12 +31,12 @@ function useTrafficSpawner() {
     const [trafficObjects, setTrafficObjects] = useState<TrafficObject[]>(initialTrafficState)
     const trafficRef = useRef(initialTrafficState)
 
-    const initialLanesState: Lanes = {
+    const [lanes, setLanes] = useState<Lanes>({
         [Position.left]: { occupied: false },
         [Position.center]: { occupied: false },
         [Position.right]: { occupied: false }
-    }
-    const [lanes, setLanes] = useState<Lanes>(initialLanesState)
+    })
+
 
     const isGameOver = useGameOver()
     const position: Position = usePlayerPosition() 
@@ -45,38 +46,48 @@ function useTrafficSpawner() {
     })
 
     useEffect(() => {
-        const lines = createSpawnInstruction()
+        const lines = createSpawnInstruction().reverse()
         const waitTime = getMinInBetweenSpawnTime(speed)
 
-        const index = 0
+        console.log('lines')
+        let index = 0
+
+        setTimeout(() => {
+            setTrafficObjects([...trafficRef.current,
+                {
+                    id: getUniqueId(),
+                    position: Position.center,
+                    speed: 10,
+                    multiplier: 2 
+                }
+            ])
+        }, 1000)
 
         const interval = setInterval(() => {
 
             const line = lines[index]
             const newObjects: TrafficObject[] = []
+            
+            if (!line) {
+                return
+            }
 
             Object.entries(line).forEach(([position, value]) => {
-                if (value === 1) {
-            //        newObjects.push({
-            //            id: getUniqueId(),
-            //            position: position as Position,
-            //            speed: speed
-            //        })    
+                if (value !== 0) {
+                    newObjects.push({
+                        id: getUniqueId(),
+                        position: position as Position,
+                        speed: speed,
+                        multiplier: value
+                    })    
                 }
             })
 
-            //setTrafficObjects([...trafficRef.current,
-            //    {
-            //        id: getUniqueId(),
-            //        position: Position.left,
-            //        speed: speed
-            //    },
-            //    {
-            //        id: getUniqueId(),
-            //        position: Position.center,
-            //        speed: speed
-            //    }
-            //])
+            index++
+
+//            setTrafficObjects([...trafficRef.current,
+//                ...newObjects
+//            ])
        }, waitTime) 
 
         return () => clearInterval(interval)

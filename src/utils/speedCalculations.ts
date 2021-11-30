@@ -6,10 +6,10 @@ export const getHitZoneTime = (seconds: number) => {
     
     return {
         enter: (seconds / 2) * 1000,
-        exit: ((seconds / 10) * 6.5) * 1000
+        exit: ((seconds / 10) * 6.25) * 1000
     }
 }
 
 export const getMinInBetweenSpawnTime = (seconds: number) => {
-    return (seconds * 0.15) * 1000
+    return (seconds * 0.125) * 1000
 }

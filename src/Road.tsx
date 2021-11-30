@@ -36,6 +36,7 @@ const Road: React.FC = () => {
                     key={trafficObject.id}
                     position={trafficObject.position}
                     speed={trafficObject.speed}
+                    multiplier={trafficObject.multiplier}
                     onFinished={() => removeTrafficObject(trafficObject.id)}
                     onEnterHitZone={() => setLaneOccupied(trafficObject.position, true)}
                     onExitHitZone={() => setLaneOccupied(trafficObject.position, false)}
