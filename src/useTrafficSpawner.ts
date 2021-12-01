@@ -11,7 +11,6 @@ export interface TrafficObject {
     id: string
     position: Position
     speed: number
-    multiplier: number
 }
 
 interface Lanes {
@@ -24,7 +23,7 @@ interface LaneStatus {
     occupied: boolean
 }
 
-const speed = 10 
+const baseSpeed = 10 
 
 function useTrafficSpawner() {
     const initialTrafficState: TrafficObject[] = []
@@ -37,7 +36,6 @@ function useTrafficSpawner() {
         [Position.right]: { occupied: false }
     })
 
-
     const isGameOver = useGameOver()
     const position: Position = usePlayerPosition() 
 
@@ -46,22 +44,24 @@ function useTrafficSpawner() {
     })
 
     useEffect(() => {
-        const lines = createSpawnInstruction().reverse()
-        const waitTime = getMinInBetweenSpawnTime(speed)
+        const lines = createSpawnInstruction()
+        const waitTime = getMinInBetweenSpawnTime(baseSpeed)
+        console.log(waitTime)
 
-        console.log('lines')
+//        console.log('lines')
+//        console.log(lines)
         let index = 0
 
-        setTimeout(() => {
-            setTrafficObjects([...trafficRef.current,
-                {
-                    id: getUniqueId(),
-                    position: Position.center,
-                    speed: 10,
-                    multiplier: 2 
-                }
-            ])
-        }, 1000)
+        // speed = 10
+        // blocks = 8
+        // halfway = 4 blocks
+        // 1 block time with speed 10 = 1.25
+        //
+
+        // 8 blocks
+        // 4 blocks is halfway
+        // 10 seconds takes 8 blocks, 1 block takes (8/ 10)
+        // 4 blocks takes (10
 
         const interval = setInterval(() => {
 
@@ -72,22 +72,25 @@ function useTrafficSpawner() {
                 return
             }
 
+//            console.log(line)
+
             Object.entries(line).forEach(([position, value]) => {
+                const extraSpeed = value <= 1 ? 0 : (baseSpeed / 8) * value
+//                console.log(baseSpeed + extraSpeed)
                 if (value !== 0) {
                     newObjects.push({
                         id: getUniqueId(),
                         position: position as Position,
-                        speed: speed,
-                        multiplier: value
+                        speed: baseSpeed - extraSpeed
                     })    
                 }
             })
 
             index++
 
-//            setTrafficObjects([...trafficRef.current,
-//                ...newObjects
-//            ])
+            setTrafficObjects([...trafficRef.current,
+                ...newObjects
+            ])
        }, waitTime) 
 
         return () => clearInterval(interval)

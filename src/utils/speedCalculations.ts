@@ -1,15 +1,12 @@
-// in ms
-export const getHitZoneTime = (seconds: number) => {
-    // speed = 10
-    // halfway = 5
-    // out of range = 6.5
-    
-    return {
-        enter: (seconds / 2) * 1000,
-        exit: ((seconds / 10) * 6.25) * 1000
-    }
+export const getEnterHitZoneTime = (speed: number) => {
+    return (speed / 2) * 1000
 }
 
-export const getMinInBetweenSpawnTime = (seconds: number) => {
-    return (seconds * 0.125) * 1000
+export const getExitHitZoneTime = (speed: number) => {
+    const enterTime = getEnterHitZoneTime(speed)
+    return enterTime + (((speed / 8) / 2) * 1000)
+}
+
+export const getMinInBetweenSpawnTime = (speed: number) => {
+    return (speed / 8) * 1000
 }

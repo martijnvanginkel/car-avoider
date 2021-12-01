@@ -2,12 +2,11 @@ import React, { useEffect } from 'react'
 import './TopDownMover.scss'
 import { useGameOver } from './GameOverProvider'
 import { Position } from './usePlayerPosition'
-import { getHitZoneTime, getMinInBetweenSpawnTime } from './utils/speedCalculations'
+import { getEnterHitZoneTime, getExitHitZoneTime, getMinInBetweenSpawnTime } from './utils/speedCalculations'
 
 interface Props {
     position: Position
     speed: number
-    multiplier: number
     onAnimationEnd: () => void
     children: React.ReactNode
     enterHitZone: () => void
@@ -17,24 +16,25 @@ interface Props {
 const TopDownMover: React.FC<Props> = ({
     position,
     speed,
-    multiplier,
     onAnimationEnd,
     children,
     enterHitZone,
     exitHitZone
 }) => {
     const isGameOver = useGameOver() 
-    console.log(multiplier, ' here')
 
     useEffect(() => {
+        const enterTime = getEnterHitZoneTime(speed)
+        const exitTime = getExitHitZoneTime(speed)
+        console.log(enterTime, exitTime)
         const enterTimer = setTimeout(() => {
-            console.log('enter')
+            console.log('in')
             enterHitZone()
-        }, getHitZoneTime(speed).enter)
+        }, enterTime)
         const exitTimer = setTimeout(() => {
-            console.log('exit')
+            console.log('out')
             exitHitZone()
-        }, getHitZoneTime(speed).exit)
+        }, exitTime)
         return () => {
             clearTimeout(enterTimer)
             clearTimeout(exitTimer)
@@ -50,7 +50,7 @@ const TopDownMover: React.FC<Props> = ({
                 }}
                 style={getSpeedAnimationDetails()}
             >
-                <div className="CenterLayout" style={getMultiplierAnimationDetails()}>
+                <div className="CenterLayout">
                     {children}
                 </div>
             </div>
@@ -71,13 +71,6 @@ const TopDownMover: React.FC<Props> = ({
         return {
             animationPlayState: playState,
             animationDuration: `${speed * 1000}ms`
-        }
-    }
-
-    function getMultiplierAnimationDetails() {
-        const y = multiplier === 1 ? 0 : (multiplier * 100) - 100
-        return {
-            transform: 'translateY(-50%)' 
         }
     }
 }

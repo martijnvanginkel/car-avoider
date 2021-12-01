@@ -29,6 +29,10 @@ const CarPosition: React.FC<Props> = ({ children, position }) => {
     }
 
     function getCarSize() {
+        // height = 10
+        // roadWith = 5
+        // carWidth = 1.667
+        // carHeight = 2.5
         const roadWidth = (height / 2)
         const carWidth = (roadWidth / 3)
         const carHeight = (carWidth * 1.5)

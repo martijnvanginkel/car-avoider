@@ -96,10 +96,24 @@ const makeTrafficVary = (lines: Line[]): Line[] => {
     return newLines 
 }
 
+const path = [
+    { [Position.left]: 1, [Position.center]: 0, [Position.right]: 0 },
+    { [Position.left]: 0, [Position.center]: 0, [Position.right]: 0 },
+    { [Position.left]: 1, [Position.center]: 0, [Position.right]: 0 },
+    { [Position.left]: 0, [Position.center]: 0, [Position.right]: 0 },
+    { [Position.left]: 1, [Position.center]: 0, [Position.right]: 0 },
+    { [Position.left]: 0, [Position.center]: 0, [Position.right]: 0 },
+    { [Position.left]: 1, [Position.center]: 0, [Position.right]: 0 },
+    { [Position.left]: 0, [Position.center]: 0, [Position.right]: 0 },
+    { [Position.left]: 1, [Position.center]: 0, [Position.right]: 0 },
+    { [Position.left]: 0, [Position.center]: 0, [Position.right]: 0 },
+]
+
 export const createSpawnInstruction = (): Line[] => {
     const filledLines = createLines()
     const linesWithPath = makePathThroughLines(filledLines)
-    const linesWithVariety = makeTrafficVary(linesWithPath) 
-    return linesWithVariety
+    const linesWithVariety = makeTrafficVary(linesWithPath)
+    console.log(path)
+    return path.reverse()//linesWithVariety
 }
 
