@@ -34,10 +34,21 @@ const Road: React.FC = () => {
 
     return (
         <div className="Road" style={getRoadWidthStyle()}>
+            {renderRoadLines()}
             {renderTraffic()}
             <PlayerCar position={position} />
         </div>
     )
+
+    function renderRoadLines() {
+        return (
+            <div className="RoadLineContainer">
+                <div className="RoadLine"></div>
+                <div className="RoadLine"></div>
+                <div className="RoadLine"></div>
+            </div>
+        )
+    }
 
     function renderTraffic() {
         return trafficObjects.map((trafficObject: TrafficObject) => {

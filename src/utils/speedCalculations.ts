@@ -23,8 +23,8 @@ export const getBonusSpeed = (speed: number, multiplier: number) => {
 // random speed that is added to make cars with the same spawn time not go at the exact same speed
 // this will have no further impact but will make it look more realistic like real traffic
 export const getRandomVarietySpeed = () => {
-    // random number between 0 and 0.2 with 3 decimals
-    return Number((Math.random() * 0.2).toFixed(3))
+    // random number between 0 and 0.3 with 3 decimals
+    return Number((Math.random() * 0.3).toFixed(3))
 }
 
 
