@@ -38,6 +38,8 @@ function useTrafficSpawner() {
     })
 
     useEffect(() => {
+        setTimeout(() => {
+
         const lines = createSpawnInstruction()
         const waitTime = getMinInBetweenSpawnTime(baseSpeed)
 
@@ -70,9 +72,10 @@ function useTrafficSpawner() {
             setTrafficObjects([...trafficRef.current,
                 ...newObjects
             ])
-       }, waitTime) 
 
+        }, waitTime) 
         return () => clearInterval(interval)
+        }, 5000)
     }, [])
 
     function setLaneOccupied(lane: Position, occupied: boolean) {

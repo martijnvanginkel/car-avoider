@@ -1,14 +1,17 @@
 .PlayerCar {
     height: 100%;
     padding-top: 50%;
+    animation-name: IntroAnimation;
+    animation-duration: 5s;
 }
 
 .InnerPlayerCar{
     transform: translateY(50%);
 }
 
-//@keyframes SlideCenterLeft {
-//    0% { transform: rotate(0deg) }
-//    50% { transform: rotate(5deg) }
-//    100% { transform: rotate(0deg) }
-//}
+
+
+@keyframes IntroAnimation {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(0%) }
+}
