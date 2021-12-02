@@ -1,6 +1,28 @@
 import React from 'react'
 import './CarLayout.scss'
 
+const colors = {
+    blue: '#3379b2',
+    red: '#e91047',
+    pink: '#fcb7a3',
+    yellow: '#e9c339',
+    green: '#8098a8'
+}
+
+const redCar = {
+    red: '#e91047',
+    pink: '#aa017e',
+    beige: '#feb7a3'
+}
+
+const blueCar = {
+    lightBlue: '#3379b2',
+    blue: '#204498',
+    darkBlue: '#10123f',
+    white: '#72deda',
+    yellow: '#ed9f32'
+}
+
 const CarLayout: React.FC = () => {
 
     return (
@@ -26,7 +48,7 @@ const CarLayout: React.FC = () => {
 
     function setMainColor() {
         return {
-            backgroundColor: 'blue'
+            backgroundColor: colors.red 
         }
     }
 
@@ -38,7 +60,7 @@ const CarLayout: React.FC = () => {
 
     function setRacingStripeColor() {
         return {
-            backgroundColor: 'white'
+            backgroundColor: colors.pink 
         }
     }
 }
