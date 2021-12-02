@@ -1,5 +1,14 @@
 .PlayerCar {
-    height: 25%;
-    width: 100%;
-    margin-top: 75%;
+    height: 100%;
+    padding-top: 50%;
 }
+
+.InnerPlayerCar{
+    transform: translateY(50%);
+}
+
+//@keyframes SlideCenterLeft {
+//    0% { transform: rotate(0deg) }
+//    50% { transform: rotate(5deg) }
+//    100% { transform: rotate(0deg) }
+//}

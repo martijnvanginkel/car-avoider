@@ -1,9 +1,9 @@
 import React from 'react'
 import './CarPosition.scss'
-import useWindowSize from './useWindowSize'
+import { useWindowSize } from './WindowSizeProvider'
 import { Position }  from './usePlayerPosition'
 import { useGameOver } from './GameOverProvider'
-import useLaneOccupation from './useLaneOccupation'
+import { getCarSize } from './utils/resolutionSizes'
 
 interface Props {
     children: React.ReactNode    
@@ -11,32 +11,27 @@ interface Props {
 }
 
 const CarPosition: React.FC<Props> = ({ children, position }) => {
-    const { height } = useWindowSize()
+    const { width, height } = useWindowSize()
     const isGameOver = useGameOver()
 
     return (
         <div className={renderOuterMoveClasses()} style={pauseAnimation()}>
-            <div className={renderInnerMoveClasses()} style={getCarSize()}>
+            <div className={renderInnerMoveClasses()} style={getCarSizeStyle()}>
                 <div className="Padding">
                     {children}
                 </div>
             </div> 
         </div>
     )
+
     function pauseAnimation() {
         const playState = isGameOver ? 'paused' : ''
         return { animationPlayState: playState }
     }
 
-    function getCarSize() {
-        // height = 10
-        // roadWith = 5
-        // carWidth = 1.667
-        // carHeight = 2.5
-        const roadWidth = (height / 2)
-        const carWidth = (roadWidth / 3)
-        const carHeight = (carWidth * 1.5)
-        return { width: `${carWidth}px`, height: `${carHeight}px` }
+    function getCarSizeStyle() {
+        const carSize = getCarSize(width, height)
+        return { width: `${carSize.width}px`, height: `${carSize.height}px` }
     }
 
     function renderOuterMoveClasses() {
@@ -54,7 +49,6 @@ const CarPosition: React.FC<Props> = ({ children, position }) => {
             [Position.center]: "InnerMoveCenter",
             [Position.left]: "InnerMoveLeft"
         }
-
         return `InnerMove ${classes[position]}`
     }
 }

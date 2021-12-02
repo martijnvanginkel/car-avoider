@@ -1,3 +1,4 @@
+import './EnemyCar.scss'
 import TopDownMover from './TopDownMover'
 import Car from './Car'
 import { Position } from './usePlayerPosition'

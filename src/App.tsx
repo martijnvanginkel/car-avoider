@@ -3,6 +3,7 @@ import './App.scss';
 import Road from './Road'
 import GameOverProvider from './GameOverProvider'
 import GameOverModal from './GameOverModal'
+import WindowSizeProvider from './WindowSizeProvider'
 
 function App() {
 
@@ -12,7 +13,9 @@ function App() {
         // by changing the key value, child components will reset
         <div className="App" key={retries}>
             <GameOverProvider>
-                <Road />
+                <WindowSizeProvider>
+                    <Road />
+                </WindowSizeProvider>
                 <GameOverModal onRetryClick={() => {
                     setRetries((prevValue: number) => prevValue + 1)
                 }}/>

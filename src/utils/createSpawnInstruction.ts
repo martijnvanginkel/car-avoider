@@ -34,6 +34,7 @@ const getRandomPosition = (currentPosition: Position) => {
 
     const randomNumber: number = Math.floor(Math.random() * 2)
     const choices = [Position.left, Position.right]
+
     return choices[randomNumber]
 }
 
@@ -54,66 +55,74 @@ const makePathThroughLines= (lines: Line[]): Line[] => {
     return cutout 
 }
 
-const makeTrafficVary = (lines: Line[]): Line[] => {
+const addVarietyToLane = (lane: number[]): number[] => {
+    let valuesInARow: number = 0 
 
-    const transformLane = (lanePosition: Position): number[] => {
-        const lane: number[] = lines.map(line => line[lanePosition])
-        let carsInARow = 0
-        lane.forEach((value: number, index: number) => {
-            if (value === 0 || index === lane.length - 1) {
-                for (let i = 0; i < carsInARow; i++) {
-                    if (i === (carsInARow - 1)) {
-                        lane[index - (i + 1)] = carsInARow
-                    } else {
-                        lane[index - (i + 1)] = 0
-                    }
+    lane.forEach((value: number, index: number) => {
+        if (value !== 0) {
+            valuesInARow++
+        }
+
+        const loopBack = () => {
+            for (let i = 0; i < valuesInARow; i++) {
+                if (i === valuesInARow - 1) {
+                    lane[index - i] = valuesInARow
+                    break;
                 }
-                carsInARow = 0
-                return
+                lane[index - i] = 0
             }
+            valuesInARow = 0
+        }
 
-            if (value === 1) {
-                carsInARow += 1     
-            }
-        })
-        return lane
-    }
+        if (valuesInARow > 2) {
+            loopBack()
+            return
+        }
+        
+        if (index === lane.length - 1) {
+            loopBack()
+            return
+        }
 
-    const leftLane = transformLane(Position.left)
-    const centerLane = transformLane(Position.center)
-    const rightLane = transformLane(Position.right)
+        if (lane[index + 1] === 0) {
+            loopBack()
+            return
+        }
+    })
+
+    return lane
+}
+
+// 1, 2 or 3 occupied spots will be replaced with one that is x the amount that are stacked
+// [1, 1, 1] in a row will become [3, 0, 0], [1, 0, 1, 1] will become [1, 0, 2, 0]
+// this is to make it feel like the traffic has more 'variety' while still having the same layed out path
+const makeTrafficVary = (lines: Line[]): Line[] => {
+    const leftLane = lines.map(line => line[Position.left])
+    const centerLane = lines.map(line => line[Position.center])
+    const rightLane = lines.map(line => line[Position.right])
+
+    const variedLeftLane = addVarietyToLane(leftLane) 
+    const variedCenterLane = addVarietyToLane(centerLane)
+    const variedRightLane = addVarietyToLane(rightLane)
 
     const newLines: Line[] = []
     
     for (let i = 0; i < leftLane.length; i++) {
         newLines.push({
-            [Position.left]: leftLane[i],
-            [Position.center]: centerLane[i],
-            [Position.right]: rightLane[i]
+            [Position.left]: variedLeftLane[i],
+            [Position.center]: variedCenterLane[i],
+            [Position.right]: variedRightLane[i]
         }) 
     }
 
     return newLines 
 }
 
-const path = [
-    { [Position.left]: 1, [Position.center]: 0, [Position.right]: 0 },
-    { [Position.left]: 0, [Position.center]: 0, [Position.right]: 0 },
-    { [Position.left]: 1, [Position.center]: 0, [Position.right]: 0 },
-    { [Position.left]: 0, [Position.center]: 0, [Position.right]: 0 },
-    { [Position.left]: 1, [Position.center]: 0, [Position.right]: 0 },
-    { [Position.left]: 0, [Position.center]: 0, [Position.right]: 0 },
-    { [Position.left]: 1, [Position.center]: 0, [Position.right]: 0 },
-    { [Position.left]: 0, [Position.center]: 0, [Position.right]: 0 },
-    { [Position.left]: 1, [Position.center]: 0, [Position.right]: 0 },
-    { [Position.left]: 0, [Position.center]: 0, [Position.right]: 0 },
-]
-
 export const createSpawnInstruction = (): Line[] => {
     const filledLines = createLines()
     const linesWithPath = makePathThroughLines(filledLines)
     const linesWithVariety = makeTrafficVary(linesWithPath)
-    console.log(path)
-    return path.reverse()//linesWithVariety
+
+    return linesWithVariety.reverse()
 }
 

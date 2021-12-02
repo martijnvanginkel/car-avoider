@@ -1,29 +1,39 @@
 import './Road.scss'
-import React, { useState, useEffect } from 'react'
-import useWindowSize from './useWindowSize'
+import React, { useEffect } from 'react'
+import { useWindowSize } from './WindowSizeProvider'
 import useTrafficSpawner, { TrafficObject } from './useTrafficSpawner'
 import usePlayerPosition, { Position } from './usePlayerPosition'
 import PlayerCar from './PlayerCar'
 import EnemyCar from './EnemyCar'
 import { useGameOverUpdate } from './GameOverProvider'
+import { getRoadWidth } from './utils/resolutionSizes'
 
 const Road: React.FC = () => {
-    const { height } = useWindowSize()
-
+    const { width, height} = useWindowSize()
     const position: Position = usePlayerPosition() 
+
+//    const [crashingInto, setCrashingInto] = useState<boolean>(false)
+
     const { trafficObjects, lanes, removeTrafficObject, setLaneOccupied } = useTrafficSpawner()
     const toggleGameIsOver = useGameOverUpdate()    
 
-//    // make a car crashed into other car boolean and set as prop to PlayerCar with according css state
+    // make a car crashed into other car boolean and set as prop to PlayerCar with according css state
     useEffect(() => {
         const currentLane = lanes[position]
         if (currentLane.occupied) {
             toggleGameIsOver?.toggleGameIsOver() 
         }
-    }, [position, lanes])
+    }, [lanes])
+
+    useEffect(() => {
+        const currentLane = lanes[position]
+        if (currentLane.occupied) {
+            toggleGameIsOver?.toggleGameIsOver() 
+        }
+    }, [position])
 
     return (
-        <div className="Road" style={getRoadWidth()}>
+        <div className="Road" style={getRoadWidthStyle()}>
             {renderTraffic()}
             <PlayerCar position={position} />
         </div>
@@ -44,8 +54,8 @@ const Road: React.FC = () => {
         })
     }
 
-    function getRoadWidth() {
-        const roadWidth = (height / 2)
+    function getRoadWidthStyle() {
+        const roadWidth = getRoadWidth(width, height)
         return { width: `${roadWidth}px` }
     }
 }

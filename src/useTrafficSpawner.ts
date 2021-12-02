@@ -1,10 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
-import usePlayerPosition, { Position } from './usePlayerPosition'
-import { useGameOver, useGameOverUpdate } from './GameOverProvider'
-import { getRandomNumber } from './utils/numbers'
-import { getTwoRandomPositions } from './utils/randomPosition'
+import { Position } from './usePlayerPosition'
 import { getUniqueId } from './utils/uniqueId'
-import { getMinInBetweenSpawnTime} from './utils/speedCalculations'
+import { getMinInBetweenSpawnTime, getBonusSpeed, getRandomVarietySpeed } from './utils/speedCalculations'
 import { createSpawnInstruction } from './utils/createSpawnInstruction'
 
 export interface TrafficObject {
@@ -36,9 +33,6 @@ function useTrafficSpawner() {
         [Position.right]: { occupied: false }
     })
 
-    const isGameOver = useGameOver()
-    const position: Position = usePlayerPosition() 
-
     useEffect(() => {
         trafficRef.current = trafficObjects 
     })
@@ -46,22 +40,8 @@ function useTrafficSpawner() {
     useEffect(() => {
         const lines = createSpawnInstruction()
         const waitTime = getMinInBetweenSpawnTime(baseSpeed)
-        console.log(waitTime)
 
-//        console.log('lines')
-//        console.log(lines)
         let index = 0
-
-        // speed = 10
-        // blocks = 8
-        // halfway = 4 blocks
-        // 1 block time with speed 10 = 1.25
-        //
-
-        // 8 blocks
-        // 4 blocks is halfway
-        // 10 seconds takes 8 blocks, 1 block takes (8/ 10)
-        // 4 blocks takes (10
 
         const interval = setInterval(() => {
 
@@ -72,16 +52,15 @@ function useTrafficSpawner() {
                 return
             }
 
-//            console.log(line)
-
             Object.entries(line).forEach(([position, value]) => {
-                const extraSpeed = value <= 1 ? 0 : (baseSpeed / 8) * value
-//                console.log(baseSpeed + extraSpeed)
+                const bonusSpeed = getBonusSpeed(baseSpeed, value)
+                const varietySpeed = getRandomVarietySpeed()
+
                 if (value !== 0) {
                     newObjects.push({
                         id: getUniqueId(),
                         position: position as Position,
-                        speed: baseSpeed - extraSpeed
+                        speed: (baseSpeed - bonusSpeed) + varietySpeed
                     })    
                 }
             })

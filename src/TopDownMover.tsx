@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import './TopDownMover.scss'
 import { useGameOver } from './GameOverProvider'
 import { Position } from './usePlayerPosition'
-import { getEnterHitZoneTime, getExitHitZoneTime, getMinInBetweenSpawnTime } from './utils/speedCalculations'
+import { getEnterHitZoneTime, getExitHitZoneTime } from './utils/speedCalculations'
 
 interface Props {
     position: Position
@@ -26,15 +26,8 @@ const TopDownMover: React.FC<Props> = ({
     useEffect(() => {
         const enterTime = getEnterHitZoneTime(speed)
         const exitTime = getExitHitZoneTime(speed)
-        console.log(enterTime, exitTime)
-        const enterTimer = setTimeout(() => {
-            console.log('in')
-            enterHitZone()
-        }, enterTime)
-        const exitTimer = setTimeout(() => {
-            console.log('out')
-            exitHitZone()
-        }, exitTime)
+        const enterTimer = setTimeout(() => enterHitZone(), enterTime)
+        const exitTimer = setTimeout(() => exitHitZone(), exitTime)
         return () => {
             clearTimeout(enterTimer)
             clearTimeout(exitTimer)

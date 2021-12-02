@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './PlayerCar.scss'
 import CarPosition from './CarPosition'
 import CarLayout from './CarLayout'
+import Car from './Car'
 import { Position } from './usePlayerPosition'
 
 interface Props {
@@ -9,11 +10,12 @@ interface Props {
 }
 
 const PlayerCar: React.FC<Props> = ({ position }) => {
+
     return (
         <div className="PlayerCar">
-            <CarPosition position={position}>
-                <CarLayout />
-            </CarPosition>
+            <div className="InnerPlayerCar">
+                <Car position={position}/>
+            </div>
         </div>
     )
 }
