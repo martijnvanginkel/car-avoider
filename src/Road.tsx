@@ -45,7 +45,6 @@ const Road: React.FC = () => {
             <div className="RoadLineContainer">
                 <div className="RoadLine"></div>
                 <div className="RoadLine"></div>
-                <div className="RoadLine"></div>
             </div>
         )
     }

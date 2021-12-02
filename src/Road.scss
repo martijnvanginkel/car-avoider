@@ -15,25 +15,18 @@
 .RoadLineContainer {
     position: absolute;
     display: flex;
-    justify-content: space-between;
     height: 100%;
     width: 100%;
-    background-color: green;
 }
 
 .RoadLine {
-    width: 100%;
+    width: calc(100% /3);
     height: 300%;
-    border: 5px dashed blue;
-//    border-width: 0 2px;
- //   border-color: white;
-  //  border-style: dashed;
-//    transform: translateY(0%);
+    border-right: 2px dashed white;
     animation-name: RoadLine;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
-    animation-duration: 10s;
-//    border: 5px solid white;
+    animation-duration: 5s;
 }
 
 @keyframes RoadLine{
