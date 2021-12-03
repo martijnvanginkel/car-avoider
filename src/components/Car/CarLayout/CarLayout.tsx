@@ -6,7 +6,8 @@ const colors = {
     red: '#e91047',
     pink: '#fcb7a3',
     yellow: '#e9c339',
-    green: '#8098a8'
+    green: '#8098a8',
+    beige: '#feb7a3'
 }
 
 const redCar = {
@@ -23,8 +24,29 @@ const blueCar = {
     yellow: '#ed9f32'
 }
 
-const CarLayout: React.FC = () => {
+interface CarSpecifications {
+    name: string
+    colors: {
+        main: string
+        headlight: string
+        racingStripe: string
+    }
+    hasRacingStripe: boolean
+}
 
+const cars: CarSpecifications[] = [
+    {
+        name: 'Red Car',
+        colors: {
+            main: colors.red,
+            headlight: colors.yellow,
+            racingStripe: colors.beige
+        },
+        hasRacingStripe: true
+    }
+]
+
+const CarLayout: React.FC = () => {
     return (
         <div className="BaseLayer" style={setMainColor()}>
             <div className="BaseLayerRacingStripe" style={setRacingStripeColor()}></div>
