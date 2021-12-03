@@ -19,7 +19,7 @@ const GameOverModal: React.FC<Props> = ({ onRetryClick }) => {
             <div className="ModalBackground">
             </div>
             <div className="ModalAligner">
-                <button className="Button" onClick={onRetryClick}>Retry</button>
+                <button className="Button" onClick={onRetryClick}>RETRY</button>
             </div>
         </>
     )

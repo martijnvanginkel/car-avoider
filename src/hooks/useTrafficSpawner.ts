@@ -20,7 +20,7 @@ interface LaneStatus {
     occupied: boolean
 }
 
-const baseSpeed = 10 
+const baseSpeed = 9
 
 function useTrafficSpawner() {
     const initialTrafficState: TrafficObject[] = []

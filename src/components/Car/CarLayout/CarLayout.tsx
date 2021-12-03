@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './CarLayout.scss'
+import { getRandomNumber } from './../../../utils/numbers'
 
 const colors = {
     blue: '#3379b2',
@@ -7,7 +8,8 @@ const colors = {
     pink: '#fcb7a3',
     yellow: '#e9c339',
     green: '#8098a8',
-    beige: '#feb7a3'
+    beige: '#feb7a3',
+    white: '#72deda'
 }
 
 const redCar = {
@@ -43,10 +45,27 @@ const cars: CarSpecifications[] = [
             racingStripe: colors.beige
         },
         hasRacingStripe: true
+    },
+    {
+        name: 'Blue Car',
+        colors: {
+            main: colors.lightBlue,
+            headlight: colors.white,
+            racingStripe: colors.blue
+        },
+        hasRacingStripe: true
     }
 ]
 
 const CarLayout: React.FC = () => {
+
+    const [carSpecifications, setCarSpecifications] = useState<CarSpecifications>(cars[0])
+
+    useEffect(() => {
+        const randomNumber = getRandomNumber(0, cars.length)         
+        setCarSpecifications(cars[randomNumber])
+    }, [])
+
     return (
         <div className="BaseLayer" style={setMainColor()}>
             <div className="BaseLayerRacingStripe" style={setRacingStripeColor()}></div>
@@ -70,19 +89,19 @@ const CarLayout: React.FC = () => {
 
     function setMainColor() {
         return {
-            backgroundColor: colors.red 
+            backgroundColor: carSpecifications.colors.main 
         }
     }
 
     function setHeadLightColor() {
         return {
-            backgroundColor: 'pink'
+            backgroundColor: carSpecifications.colors.headlight 
         }
     }
 
     function setRacingStripeColor() {
         return {
-            backgroundColor: colors.pink 
+            backgroundColor: carSpecifications.colors.racingStripe
         }
     }
 }

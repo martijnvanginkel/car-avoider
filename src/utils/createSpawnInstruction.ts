@@ -8,7 +8,7 @@ interface Line {
 }
 
 const createLines = (): Line[] => {
-    const length = 10
+    const length = 100
     const lines: Line[] = []
 
     const line: Line = {
