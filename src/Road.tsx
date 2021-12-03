@@ -33,12 +33,31 @@ const Road: React.FC = () => {
     }, [position])
 
     return (
-        <div className="Road" style={getRoadWidthStyle()}>
-            {renderRoadLines()}
-            {renderTraffic()}
-            <PlayerCar position={position} />
-        </div>
+        <>
+            {renderRoadSideArea(Position.left)}
+            <div className="Road" style={getRoadWidthStyle()}>
+                {renderRoadLines()}
+                {renderTraffic()}
+                <PlayerCar position={position} />
+            </div>
+            {renderRoadSideArea(Position.right)}
+        </>
     )
+
+    function renderRoadSideArea(side: Position.left | Position.right) {
+
+        const border = {
+            [Position.left]: { borderWidth: '0 0 0 2px', justifyContent: 'flex-end' },
+            [Position.right]: { borderWidth: '0 2px 0 0', justifyContent: 'flex-start' }
+        }
+
+        return (
+            <div className="RoadSideArea" style={border[side]}>
+                <div className="RoadSideOuterLine"></div>
+                <div className="RoadSideInnerLine"></div>
+            </div>
+        )
+    }
 
     function renderRoadLines() {
         return (
