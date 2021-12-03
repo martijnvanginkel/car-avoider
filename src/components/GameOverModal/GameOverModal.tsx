@@ -1,6 +1,6 @@
 import React from 'react'
 import './GameOverModal.scss'
-import { useGameOver } from './GameOverProvider'
+import { useGameOver } from './../../providers/GameOverProvider'
 
 interface Props {
     onRetryClick: () => void

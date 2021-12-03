@@ -1,7 +1,6 @@
-import './EnemyCar.scss'
-import TopDownMover from './TopDownMover'
+import TopDownMover from './../TopDownMover/TopDownMover'
 import Car from './Car'
-import { Position } from './usePlayerPosition'
+import { Position } from './../../hooks/usePlayerPosition'
 
 interface Props {
     position: Position

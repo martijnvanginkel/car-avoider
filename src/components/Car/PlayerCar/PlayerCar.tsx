@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import './PlayerCar.scss'
-import CarPosition from './CarPosition'
-import CarLayout from './CarLayout'
-import Car from './Car'
-import { Position } from './usePlayerPosition'
+import Car from './../Car'
+import { Position } from './../../../hooks/usePlayerPosition'
 
 interface Props {
     position: Position

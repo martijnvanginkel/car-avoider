@@ -1,7 +1,7 @@
 import React from 'react'
-import CarPosition from './CarPosition'
-import CarLayout from './CarLayout'
-import { Position } from './usePlayerPosition'
+import CarPosition from './CarPosition/CarPosition'
+import CarLayout from './CarLayout/CarLayout'
+import { Position } from './../../hooks/usePlayerPosition'
 
 interface Props {
     position: Position

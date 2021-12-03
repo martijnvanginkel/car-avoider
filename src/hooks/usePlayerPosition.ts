@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useGameOver } from './GameOverProvider'
+import { useGameOver } from './../providers/GameOverProvider'
 
 export enum Position {
     left = 'left',

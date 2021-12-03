@@ -1,4 +1,4 @@
-import { Position } from './../usePlayerPosition'
+import { Position } from './../hooks/usePlayerPosition'
 import { isEvenNumber } from './numbers'
 
 interface Line {

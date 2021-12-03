@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import './TopDownMover.scss'
-import { useGameOver } from './GameOverProvider'
-import { Position } from './usePlayerPosition'
-import { getEnterHitZoneTime, getExitHitZoneTime } from './utils/speedCalculations'
+import { useGameOver } from './../../providers/GameOverProvider'
+import { Position } from './../../hooks/usePlayerPosition'
+import { getEnterHitZoneTime, getExitHitZoneTime } from './../../utils/speedCalculations'
 
 interface Props {
     position: Position

@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
 import { Position } from './usePlayerPosition'
-import { getUniqueId } from './utils/uniqueId'
-import { getMinInBetweenSpawnTime, getBonusSpeed, getRandomVarietySpeed } from './utils/speedCalculations'
-import { createSpawnInstruction } from './utils/createSpawnInstruction'
+import { getUniqueId } from './../utils/uniqueId'
+import { getMinInBetweenSpawnTime, getBonusSpeed, getRandomVarietySpeed } from './../utils/speedCalculations'
+import { createSpawnInstruction } from './../utils/createSpawnInstruction'
 
 export interface TrafficObject {
     id: string

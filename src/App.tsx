@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import './App.scss';
-import Road from './Road'
-import GameOverProvider from './GameOverProvider'
-import GameOverModal from './GameOverModal'
-import WindowSizeProvider from './WindowSizeProvider'
+import Road from './components/Road/Road'
+import GameOverProvider from './providers/GameOverProvider'
+import GameOverModal from './components/GameOverModal/GameOverModal'
+import WindowSizeProvider from './providers/WindowSizeProvider'
 
 function App() {
 

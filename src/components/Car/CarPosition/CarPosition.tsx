@@ -1,9 +1,9 @@
 import React from 'react'
 import './CarPosition.scss'
-import { useWindowSize } from './WindowSizeProvider'
-import { Position }  from './usePlayerPosition'
-import { useGameOver } from './GameOverProvider'
-import { getCarSize } from './utils/resolutionSizes'
+import { useWindowSize } from './../../../providers/WindowSizeProvider'
+import { Position }  from './../../../hooks/usePlayerPosition'
+import { useGameOver } from './../../../providers/GameOverProvider'
+import { getCarSize } from './../../../utils/resolutionSizes'
 
 interface Props {
     children: React.ReactNode    

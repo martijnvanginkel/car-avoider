@@ -1,12 +1,12 @@
 import './Road.scss'
 import React, { useEffect } from 'react'
-import { useWindowSize } from './WindowSizeProvider'
-import useTrafficSpawner, { TrafficObject } from './useTrafficSpawner'
-import usePlayerPosition, { Position } from './usePlayerPosition'
-import PlayerCar from './PlayerCar'
-import EnemyCar from './EnemyCar'
-import { useGameOverUpdate } from './GameOverProvider'
-import { getRoadWidth } from './utils/resolutionSizes'
+import { useWindowSize } from './../../providers/WindowSizeProvider'
+import useTrafficSpawner, { TrafficObject } from './../../hooks/useTrafficSpawner'
+import usePlayerPosition, { Position } from './../../hooks/usePlayerPosition'
+import PlayerCar from './../Car/PlayerCar/PlayerCar'
+import EnemyCar from './../Car/EnemyCar'
+import { useGameOverUpdate } from './../../providers/GameOverProvider'
+import { getRoadWidth } from './../../utils/resolutionSizes'
 
 const Road: React.FC = () => {
     const { width, height} = useWindowSize()
