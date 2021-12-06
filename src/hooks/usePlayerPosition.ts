@@ -7,14 +7,16 @@ export enum Position {
     right = 'right'
 }
 
-enum ArrowKey {
+enum Direction {
     left = 'left',
     right = 'right'
 }
 
 function usePlayerPosition() {
-    const [position, setPosition] = useState<Position>(Position.center)
+    const [position, setPosition] = useState<{ position: Position, direction: Direction }>({ position: Position.center, direction: Direction.left })
     const isGameOver = useGameOver() 
+
+    console.log(position)
 
     useEffect(() => { 
         if (isGameOver === true) {
@@ -25,11 +27,11 @@ function usePlayerPosition() {
                 return
             }
             if (event.key === 'ArrowLeft') {
-                changePosition(ArrowKey.left)
+                changePosition(Direction.left)
             }
 
             if (event.key === 'ArrowRight') {
-                changePosition(ArrowKey.right)
+                changePosition(Direction.right)
             }
         }
         window.addEventListener('keydown', handleKeyEvent)
@@ -38,18 +40,18 @@ function usePlayerPosition() {
         }
     })
 
-    function changePosition(key: ArrowKey) {
-        if (position !== Position.center) {
-            setPosition(Position.center)
+    function changePosition(direction: Direction) {
+        if (position.position !== Position.center) {
+            setPosition({ position: Position.center, direction: direction })
             return
         }
 
-        if (key === ArrowKey.left) {
-            setPosition(Position.left)
+        if (direction === Direction.left) {
+            setPosition({ position: Position.left, direction: direction })
         }
 
-        if (key === ArrowKey.right) {
-            setPosition(Position.right)
+        if (direction === Direction.right) {
+            setPosition({ position: Position.right, direction: direction })
         }
     }
 

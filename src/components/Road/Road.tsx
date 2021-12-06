@@ -1,5 +1,5 @@
 import './Road.scss'
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useWindowSize } from './../../providers/WindowSizeProvider'
 import useTrafficSpawner, { TrafficObject } from './../../hooks/useTrafficSpawner'
 import usePlayerPosition, { Position } from './../../hooks/usePlayerPosition'
@@ -10,24 +10,21 @@ import { getRoadWidth } from './../../utils/resolutionSizes'
 
 const Road: React.FC = () => {
     const { width, height} = useWindowSize()
-    const position: Position = usePlayerPosition() 
-
-//    const [crashingInto, setCrashingInto] = useState<boolean>(false)
-
     const { trafficObjects, lanes, removeTrafficObject, setLaneOccupied } = useTrafficSpawner()
     const toggleGameIsOver = useGameOverUpdate()    
 
-    // make a car crashed into other car boolean and set as prop to PlayerCar with according css state
+    const { position, direction } = usePlayerPosition() 
+
     useEffect(() => {
-        const currentLane = lanes[position]
-        if (currentLane.occupied) {
+        const newLane = lanes[position]
+        if (newLane.occupied) {
             toggleGameIsOver?.toggleGameIsOver() 
         }
     }, [lanes])
 
     useEffect(() => {
-        const currentLane = lanes[position]
-        if (currentLane.occupied) {
+        const newLane = lanes[position]
+        if (newLane.occupied) {
             toggleGameIsOver?.toggleGameIsOver() 
         }
     }, [position])
