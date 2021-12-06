@@ -3,27 +3,15 @@ import './CarLayout.scss'
 import { getRandomNumber } from './../../../utils/numbers'
 
 const colors = {
-    blue: '#3379b2',
+    lightBlue: '#3379b2',
+    darkBlue: '#10123f',
     red: '#e91047',
     pink: '#fcb7a3',
-    yellow: '#e9c339',
-    green: '#8098a8',
+    orange: '#e0a217',
+    yellow: '#fbef34',
+    green: '#8297a8',
     beige: '#feb7a3',
     white: '#72deda'
-}
-
-const redCar = {
-    red: '#e91047',
-    pink: '#aa017e',
-    beige: '#feb7a3'
-}
-
-const blueCar = {
-    lightBlue: '#3379b2',
-    blue: '#204498',
-    darkBlue: '#10123f',
-    white: '#72deda',
-    yellow: '#ed9f32'
 }
 
 interface CarSpecifications {
@@ -51,10 +39,28 @@ const cars: CarSpecifications[] = [
         colors: {
             main: colors.lightBlue,
             headlight: colors.white,
-            racingStripe: colors.blue
+            racingStripe: colors.white
         },
         hasRacingStripe: true
-    }
+    },
+    {
+        name: 'Green Car',
+        colors: {
+            main: colors.green,
+            headlight: colors.yellow,
+            racingStripe: colors.white
+        },
+        hasRacingStripe: true
+    },
+    {
+        name: 'Yellow Car',
+        colors: {
+            main: colors.orange,
+            headlight: colors.darkBlue,
+            racingStripe: colors.yellow,
+        },
+        hasRacingStripe: true 
+    },
 ]
 
 const CarLayout: React.FC = () => {
@@ -100,8 +106,16 @@ const CarLayout: React.FC = () => {
     }
 
     function setRacingStripeColor() {
+        const hasStripe = carSpecifications.hasRacingStripe
+
         return {
-            backgroundColor: carSpecifications.colors.racingStripe
+            backgroundColor: hasStripe ? carSpecifications.colors.racingStripe : ''
+        }
+    }
+
+    function setWindowColor() {
+        return {
+            // darkblue?
         }
     }
 }
