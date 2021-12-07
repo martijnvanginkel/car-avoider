@@ -38,44 +38,44 @@ function useTrafficSpawner() {
     })
 
     useEffect(() => {
-        setTimeout(() => {
-
-        const lines = createSpawnInstruction()
-        const waitTime = getMinInBetweenSpawnTime(baseSpeed)
-
-        let index = 0
-
-        const interval = setInterval(() => {
-
-            const line = lines[index]
-            const newObjects: TrafficObject[] = []
-            
-            if (!line) {
-                return
-            }
-
-            Object.entries(line).forEach(([position, value]) => {
-                const bonusSpeed = getBonusSpeed(baseSpeed, value)
-                const varietySpeed = getRandomVarietySpeed()
-
-                if (value !== 0) {
-                    newObjects.push({
-                        id: getUniqueId(),
-                        position: position as Position,
-                        speed: (baseSpeed - bonusSpeed) + varietySpeed
-                    })    
+        const timer = setTimeout(() => {
+            const lines = createSpawnInstruction()
+            const waitTime = getMinInBetweenSpawnTime(baseSpeed)
+    
+            let index = 0
+    
+            const interval = setInterval(() => {
+    
+                const line = lines[index]
+                const newObjects: TrafficObject[] = []
+                
+                if (!line) {
+                    return
                 }
-            })
-
-            index++
-
-            setTrafficObjects([...trafficRef.current,
-                ...newObjects
-            ])
-
-        }, waitTime) 
-        return () => clearInterval(interval)
+    
+                Object.entries(line).forEach(([position, value]) => {
+                    const bonusSpeed = getBonusSpeed(baseSpeed, value)
+                    const varietySpeed = getRandomVarietySpeed()
+    
+                    if (value !== 0) {
+                        newObjects.push({
+                            id: getUniqueId(),
+                            position: position as Position,
+                            speed: (baseSpeed - bonusSpeed) + varietySpeed
+                        })    
+                    }
+                })
+    
+                index++
+    
+                setTrafficObjects([...trafficRef.current,
+                    ...newObjects
+                ])
+    
+            }, waitTime) 
+            return () => clearInterval(interval)
         }, 5000)
+        return () => clearTimeout(timer)
     }, [])
 
     function setLaneOccupied(lane: Position, occupied: boolean) {

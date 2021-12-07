@@ -8,6 +8,10 @@
     background-color: #138b57;
 }
 
-.ScoredPoint {
+.PointsContainer {
     position: absolute;
-} 
+    top: 10%;
+    left: 50%;
+    z-index: 1;
+    background-color: white;
+}

@@ -15,7 +15,7 @@ function App() {
         <div className="App" key={retries}>
             <GameOverProvider>
                 <WindowSizeProvider>
-                    <Road/>
+                    <GameView />
                 </WindowSizeProvider>
                 <GameOverModal onRetryClick={() => {
                     setRetries((prevValue: number) => prevValue + 1)

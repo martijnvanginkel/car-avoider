@@ -21,6 +21,7 @@ interface CarSpecifications {
         headlight: string
         racingStripe: string
     }
+    hasRacingStripe: boolean
 }
 
 const cars: CarSpecifications[] = [
@@ -30,7 +31,8 @@ const cars: CarSpecifications[] = [
             main: colors.red,
             headlight: colors.yellow,
             racingStripe: colors.beige
-        }
+        },
+        hasRacingStripe: true
     },
     {
         name: 'Blue Car',
@@ -38,7 +40,8 @@ const cars: CarSpecifications[] = [
             main: colors.lightBlue,
             headlight: colors.white,
             racingStripe: colors.white
-        }
+        },
+        hasRacingStripe: true
     },
     {
         name: 'Green Car',
@@ -46,7 +49,8 @@ const cars: CarSpecifications[] = [
             main: colors.green,
             headlight: colors.yellow,
             racingStripe: colors.white
-        }
+        },
+        hasRacingStripe: true
     },
     {
         name: 'Yellow Car',
@@ -54,7 +58,8 @@ const cars: CarSpecifications[] = [
             main: colors.orange,
             headlight: colors.darkBlue,
             racingStripe: colors.yellow,
-        }
+        },
+        hasRacingStripe: true 
     },
 ]
 
@@ -103,12 +108,6 @@ const CarLayout: React.FC = () => {
     function setRacingStripeColor() {
         return {
             backgroundColor: carSpecifications.colors.racingStripe
-        }
-    }
-
-    function setWindowColor() {
-        return {
-            // darkblue?
         }
     }
 }

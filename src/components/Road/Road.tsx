@@ -77,9 +77,15 @@ const Road: React.FC<Props> = ({ playerPassedObject }) => {
                     key={trafficObject.id}
                     position={trafficObject.position}
                     speed={trafficObject.speed}
-                    onFinished={() => removeTrafficObject(trafficObject.id)}
-                    onEnterHitZone={() => setLaneOccupied(trafficObject.position, true)}
-                    onExitHitZone={() => onPlayerPassedObject(trafficObject)}
+                    onFinished={() => {
+                        removeTrafficObject(trafficObject.id)
+                    }}
+                    onEnterHitZone={() => {
+                        setLaneOccupied(trafficObject.position, true)
+                    }}
+                    onExitHitZone={() => { 
+                        onPlayerPassedObject(trafficObject)
+                    }}
                 />
             )
         })
@@ -87,7 +93,8 @@ const Road: React.FC<Props> = ({ playerPassedObject }) => {
 
     function onPlayerPassedObject(trafficObject: TrafficObject) {
         setLaneOccupied(trafficObject.position, false)
-//        playerPassedObject()
+        console.log('passed here')
+        playerPassedObject()
     }
 
     function getRoadWidthStyle() {
