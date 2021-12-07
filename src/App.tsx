@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import './App.scss';
+import GameView from './components/GameView/GameView'
 import Road from './components/Road/Road'
 import GameOverProvider from './providers/GameOverProvider'
 import GameOverModal from './components/GameOverModal/GameOverModal'
@@ -14,7 +15,7 @@ function App() {
         <div className="App" key={retries}>
             <GameOverProvider>
                 <WindowSizeProvider>
-                    <Road />
+                    <Road/>
                 </WindowSizeProvider>
                 <GameOverModal onRetryClick={() => {
                     setRetries((prevValue: number) => prevValue + 1)

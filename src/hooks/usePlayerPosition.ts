@@ -7,7 +7,7 @@ export enum Position {
     right = 'right'
 }
 
-enum Direction {
+export enum Direction {
     left = 'left',
     right = 'right'
 }
@@ -15,8 +15,6 @@ enum Direction {
 function usePlayerPosition() {
     const [position, setPosition] = useState<{ position: Position, direction: Direction }>({ position: Position.center, direction: Direction.left })
     const isGameOver = useGameOver() 
-
-    console.log(position)
 
     useEffect(() => { 
         if (isGameOver === true) {

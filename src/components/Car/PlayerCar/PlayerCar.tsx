@@ -1,38 +1,36 @@
 import React from 'react'
 import './PlayerCar.scss'
 import Car from './../Car'
-import { Position } from './../../../hooks/usePlayerPosition'
+import { Position, Direction } from './../../../hooks/usePlayerPosition'
 
 interface Props {
     position: Position
-    crashed?: 'left' | 'right'
+    crashedIntoSide?: Direction 
 }
 
-const PlayerCar: React.FC<Props> = ({ position, crashed }) => {
-
+const PlayerCar: React.FC<Props> = ({ position, crashedIntoSide }) => {
     return (
         <div className="PlayerCar">
             <div className="CenterPlayerCar">
+                <div style={getCrashedStyle()}>
                     <Car position={position} />
+                </div>
             </div>
         </div>
     )
-//    <div className="crash" style={getCrashedStyle()}>
-//    </div>
 
     function getCrashedStyle() {
-        return null
-       if (!crashed) {
-            return null 
+        if (!crashedIntoSide) {
+            return undefined 
         }
-        if (crashed === 'left') {
+        if (crashedIntoSide === Direction.left) {
             return {
-                transform: 'translateX(-20%) rotate(-10deg)'
+                transform: 'translateX(15%)'
             }
         }
-        if (crashed === 'right') {
+        if (crashedIntoSide === Direction.right) {
             return {
-                transform: 'translateX(20%) rotate(10deg)'
+                transform: 'translateX(-15%)'
             }
         }
     }

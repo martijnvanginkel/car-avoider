@@ -1,0 +1,13 @@
+.Background {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background-color: #138b57;
+}
+
+.ScoredPoint {
+    position: absolute;
+} 
