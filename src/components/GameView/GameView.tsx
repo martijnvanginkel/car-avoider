@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import './GameView.scss';
 import Road from './../Road/Road'
 import { getUniqueId } from './../../utils/uniqueId'
+import { useGameOver } from './../../providers/GameOverProvider'
 
 interface ScoredPoint {
     id: string
@@ -10,6 +11,13 @@ interface ScoredPoint {
 function GameView() {
 
     const [scoredPoints, setScoredPoints] = useState<ScoredPoint[]>([])
+    const isGameOver = useGameOver()
+
+    const gameOverRef = useRef(isGameOver)
+
+    useEffect(() => {
+        gameOverRef.current = isGameOver
+    })
 
     return (
         <div className="Background">
@@ -39,9 +47,11 @@ function GameView() {
             )
         })
     }
-    
 
     function addPoint() {
+        if (gameOverRef.current) {
+            return
+        }
         const newPoint: ScoredPoint = {
             id: getUniqueId()
         }
