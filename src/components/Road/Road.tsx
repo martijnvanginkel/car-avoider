@@ -93,7 +93,6 @@ const Road: React.FC<Props> = ({ playerPassedObject }) => {
 
     function onPlayerPassedObject(trafficObject: TrafficObject) {
         setLaneOccupied(trafficObject.position, false)
-        console.log('passed here')
         playerPassedObject()
     }
 

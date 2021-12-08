@@ -11,12 +11,15 @@
 .CenterPoints {
     position: absolute;
     top: 10%;
-    left: 50%;
+    width: 10%;
+    left: 45%;
     z-index: 1;
 }
 
 .PointsContainer {
     position: relative;
+    display: flex;
+    justify-content: center;
 }
 
 .Point {

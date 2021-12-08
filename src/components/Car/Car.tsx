@@ -8,9 +8,6 @@ interface Props {
 }
 
 const Car: React.FC<Props> = (props: Props) => {
-
-    
-
     return (
          <CarPosition position={props.position}>
              <CarLayout/>

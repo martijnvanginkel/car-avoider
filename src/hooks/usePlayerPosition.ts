@@ -32,6 +32,7 @@ function usePlayerPosition() {
                 changePosition(Direction.right)
             }
         }
+
         window.addEventListener('keydown', handleKeyEvent)
         return () => {
             window.removeEventListener('keydown', handleKeyEvent)
