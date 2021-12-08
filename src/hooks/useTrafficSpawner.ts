@@ -3,6 +3,7 @@ import { Position } from './usePlayerPosition'
 import { getUniqueId } from './../utils/uniqueId'
 import { getMinInBetweenSpawnTime, getBonusSpeed, getRandomVarietySpeed } from './../utils/speedCalculations'
 import { createSpawnInstruction } from './../utils/createSpawnInstruction'
+import { useGameOver } from '../providers/GameOverProvider'
 
 export interface TrafficObject {
     id: string
@@ -26,6 +27,9 @@ function useTrafficSpawner() {
     const initialTrafficState: TrafficObject[] = []
     const [trafficObjects, setTrafficObjects] = useState<TrafficObject[]>(initialTrafficState)
     const trafficRef = useRef(initialTrafficState)
+    
+    const isGameOver = useGameOver()
+    const gameOverRef = useRef(isGameOver)
 
     const [lanes, setLanes] = useState<Lanes>({
         [Position.left]: { occupied: false },
@@ -34,7 +38,8 @@ function useTrafficSpawner() {
     })
 
     useEffect(() => {
-        trafficRef.current = trafficObjects 
+        trafficRef.current = trafficObjects
+        gameOverRef.current = isGameOver
     })
 
     useEffect(() => {
@@ -45,7 +50,12 @@ function useTrafficSpawner() {
             let index = 0
     
             const interval = setInterval(() => {
-    
+                if (gameOverRef.current) {
+                    clearTimeout(timer)
+                    clearInterval(interval)
+                    return
+                }
+
                 const line = lines[index]
                 const newObjects: TrafficObject[] = []
                 
