@@ -8,10 +8,35 @@
     background-color: #138b57;
 }
 
-.PointsContainer {
+.CenterPoints {
     position: absolute;
     top: 10%;
     left: 50%;
     z-index: 1;
-    background-color: white;
 }
+
+.PointsContainer {
+    position: relative;
+}
+
+.Point {
+    position: absolute;
+    color: white;
+    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+    font-size: 1.5em;
+    animation-name: PointMovement;
+    animation-duration: 500ms; 
+    animation-timing-function: linear;
+}
+
+@keyframes PointMovement {
+    from {
+        transform: translateY(0%);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(300%);
+        opacity: 0;
+    }
+}
+

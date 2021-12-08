@@ -1,52 +1,56 @@
 import React, { useState } from 'react'
 import './GameView.scss';
 import Road from './../Road/Road'
+import { getUniqueId } from './../../utils/uniqueId'
 
 interface ScoredPoint {
-//    id: string     
+    id: string
 }
 
 function GameView() {
 
-    const [scoredPoints, setScoredPoints] = useState<number[]>([])
+    const [scoredPoints, setScoredPoints] = useState<ScoredPoint[]>([])
 
     return (
         <div className="Background">
             {renderPointScorer()}
-            <Road
-                playerPassedObject={() => scoredPoint()} 
-            />
+            <Road playerPassedObject={addPoint} />
         </div>
     )
 
     function renderPointScorer() {
         return (
-            <div className="PointsContainer">
-                <div className="Point">2</div>
-                {renderPoints()}
+            <div className="CenterPoints">
+                <div className="PointsContainer">
+                    {renderPoints()}
+                </div>
             </div>
         )
- //       return scoredPoints.map(scoredPoint => {
- //           return <div className="ScoredPoint">+1</div>
- //       })
     }
 
     function renderPoints() {
-        return scoredPoints.map((scoredPoint: number, index: number) => {
-            return <div key={index} className="Point">1</div>
+        return scoredPoints.map((scoredPoint: ScoredPoint) => {
+            return (
+                <div key={scoredPoint.id} className="Point" onAnimationEnd={() => {
+                    removePoint(scoredPoint)
+                }}>
+                    +1
+                </div>
+            )
         })
     }
     
 
-    function scoredPoint() {
-        console.log('scored point')
- //       const stateCopy = [...scoredPoints]
-//        stateCopy.push(1)
+    function addPoint() {
+        const newPoint: ScoredPoint = {
+            id: getUniqueId()
+        }
+        setScoredPoints(prevValue => [...prevValue, newPoint])
+    }
 
-//        setScoredPoints([1, 2, 3])
-
-        setScoredPoints(prevValue => [...prevValue, 1])
-//        console.log('scored point')
+    function removePoint(scoredPoint: ScoredPoint) {
+        const filtered = scoredPoints.filter(point=> point.id !== scoredPoint.id)
+        setScoredPoints(filtered)
     }
 }
 
